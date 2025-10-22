@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8" />
+  <title>Visor - Neiva</title>
+  <link rel="icon" href="assets/img/LogoArbi.png">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+
+<body style="height: 100vh; margin: 0; display: flex; flex-direction: column;">
+
+  <main style="display: flex; flex-direction: column; height: 100vh;">
+    <nav class="navbar navbar-expand-lg bg-white mb-0" id="visor-header" style="flex-shrink: 0;">
+      <div class="container-fluid rounded-4 mx-1 px-2 px-sm-3 " style="background-color: #002F55;">
+        <div class="d-flex align-items-center justify-content-between gap-2 my-1">
+          <a class="navbar-brand d-flex align-items-center gap-2 m-0" href="https://arbimaps.com/index.php">
+            <img src="assets/img/LogoArbi.png" alt="Logo Arbi" class="img-arbi" style="width: 40px; height: 40px;"
+              class="my-1">
+          </a>
+
+          <h5 class="fw-bold text-white m-0 d-none d-md-inline-block" style="color:#002F55; font-size: 0.8em;"
+            id="ubicacion-municipioTitulo">Visor
+            Urbano Neiva</h5>
+          <button id="mostrar-menu" class="d-md-none" type="button" data-bs-toggle="offcanvas"
+            data-bs-target="#offcanvasFiltros" aria-controls="offcanvasFiltros" style="background-color: transparent;">
+            <i class="bi bi-list text-white fs-1"></i>
+          </button>
+
+        </div>
+
+        <div class="d-flex text-white align-items-center gap-2  gap-md-3">
+
+          <!-- boton selección, para seleccionar terreno -->
+          <button class="btn btn-light btn-sm rounded-3" id="btn-seleccionar" type="button">
+            <i class="fa-solid fa-arrow-pointer px-1" style="color: #002F55 ;"></i>
+          </button>
+
+          <!-- boton home, para volver al zoom inicial -->
+          <button class="btn btn-light btn-sm rounded-3" onclick="resetView()">
+            <i class="bi bi-house-fill" style="color: #002F55;"></i>
+          </button>
+
+          <!-- boton download, para descargar selección -->
+          <button class="btn btn-light btn-sm rounded-3" id="btn-exportar-seleccion">
+            <span class=" d-none d-md-inline fw-bold" style="color: #002F55;">Descargar Selección <i
+                class="bi bi-cloud-download-fill mx-1 d-none d-md-inline" style="color: #002F55;"></i></span>
+
+            <i onclick="exportarCapaFiltradaMovil();" class="bi bi-cloud-download-fill mx-1 d-md-none"
+              style="color: #002F55;"></i>
+          </button>
+
+          <!------------ sección dropdown para seleccionar el municipio que se quiera visualizar -------------------->
+
+          <!-- <div class="dropdown">
+            <button class="btn btn-light btn-sm dropdown-toggle d-flex align-items-center  gap-1 gap-md-2 rounded-3"
+              style="color: #002F55;" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+              <i class="bi bi-globe-americas-fill"></i>
+              <span class=" d-none d-sm-inline fw-bold" style="color: #002F55;">Municipios</span>
+            </button>
+
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item" href="?mapa=san_pedro" onclick="cargarMunicipio('san_pedro')">San Pedro de
+                  Urabá</a></li>
+              <li><a class="dropdown-item" href="?mapa=san_juan" onclick="cargarMunicipio('san_juan')">San Juan de
+                  Urabá</a></li>
+              <li><a class="dropdown-item" href="?mapa=necocli" onclick="cargarMunicipio('necocli')">Necoclí</a></li>
+            </ul>
+          </div> -->
+
+          <!-- ----------------------------------------------------------------------------------------------------------------------
+          ---------------- Sección dropdown para seleccionar la capa que se quiere mostrar en el mapa ------------------------
+          ---------------------------------------------------------------------------------------------------------------------- -->
+
+          <div class="dropdown" id="selector-mapa">
+            <button class="btn btn-light btn-sm dropdown-toggle d-flex align-items-center  gap-1 gap-md-2 rounded-3"
+              type="button" id="dropdownMapaBase" data-bs-toggle="dropdown" aria-expanded="false"
+              style="color: #002F55;">
+              <span class="d-none d-sm-inline fw-bold" style="color: #002F55;">Vista</span>
+              <i class="bi bi-eye-fill"></i>
+            </button>
+            <div class="dropdown-menu py-3 rounded-3 " aria-labelledby="dropdownMapaBase"
+              style="min-width: 100px; width: 100px;">
+
+              <article class="d-flex flex-column align-items-center mb-3 capa-vista" onclick="cambiarMapaBase('vial')">
+                <img src="assets/img/relieve.png" alt="capa_relieve" class=" rounded-4"
+                  style="cursor: pointer; width: 60px; height: 60px;">
+                <small style="color: #002F55;">Relieve</small>
+              </article>
+
+              <article class="d-flex flex-column align-items-center mb-3 capa-vista"
+                onclick="cambiarMapaBase('satelital')">
+                <img src="assets/img/satelite.png" alt="capa_satelital" class=" rounded-4 "
+                  style="cursor: pointer; width: 60px; height: 60px;">
+                <small style="color: #002F55;">Satelite</small>
+              </article>
+
+              <article class="d-flex flex-column align-items-center capa-vista" onclick="cambiarMapaBase('hibrido')">
+                <img src="assets/img/hibrido.png" alt="capa_hibrido" class=" rounded-4 "
+                  style="cursor: pointer; width: 60px; height: 60px;">
+                <small style="color: #002F55;">Híbrido</small>
+              </article>
+            </div>
+          </div>
+
+          <div class="dropdown" id="zona-selector">
+            <button class="btn btn-light btn-sm dropdown-toggle d-flex align-items-center gap-1 gap-md-2 rounded-3"
+              type="button" id="dropdownZona" data-bs-toggle="dropdown" aria-expanded="false" style="color: #002F55;">
+              <span class="d-none d-sm-inline fw-bold">Comunas</span>
+              <i class="bi-grid-3x3-gap"></i>
+            </button>
+            <div class="dropdown-menu p-3 w-100 w-md-auto dropdown-menu dropdown-menu-end rounded-3"
+              aria-labelledby=" dropdownZona" style="min-width:220px;max-width:100vw;">
+              <label for="zona" class="form-label mb-1">Selecciona la comuna:</label>
+              <select id="zona" class="form-select form-select-sm mb-2" onchange="cargarZona()">
+                <option value="" disabled selected hidden>Ninguna</option>
+              </select>
+              <button onclick="limpiarZona(); limpiarFiltro();" class="btn btn-sm w-100 border rounded-3 "
+                style="background-color: #002F55; color: #FEFEFE;">Limpiar</button>
+            </div>
+          </div>
+
+          <div class="dropdown" id="GestionarCapas">
+            <button class="btn btn-light btn-sm dropdown-toggle d-flex align-items-center gap-1 gap-md-2 rounded-3"
+              type="button" id="dropdownCapas" data-bs-toggle="dropdown" aria-expanded="false" style="color: #002F55;">
+              <span class="d-none d-sm-inline fw-bold">Gestionar Capas</span>
+              <i class="bi bi-layers-fill ms-2"></i>
+            </button>
+
+            <!-- -----------------------------capas urbanas---------------------------------------------- -->
+
+            <div class="dropdown-menu p-3 w-100 w-md-auto dropdown-menu dropdown-menu-end rounded-3 "
+              aria-labelledby="dropdownCapas" style="min-width:220px;max-width:100vw;">
+              <label class="form-label mb-2  text-white p-1 px-2 rounded-3 w-100"
+                style="background-color: #002F55; font-size: 0.9em;">Selecciona las capas:</label>
+
+              <p class="form-label mb-2  p-1 px-2  w-100 border-bottom fw-bold" id="labelUrbano">Urbano</p>
+              <div class="form-check">
+                <input class="form-check-input" type="checkbox" value="Terreno" id="capaTerreno"
+                  onchange="toggleCapa('Terreno')">
+                <label class="form-check-label" for="capaTerreno">Terreno</label>
+              </div>
+              <div class="form-check">
+                <input class="form-check-input" type="checkbox" value="Unidades" id="capaUnidades"
+                  onchange="toggleCapa('Unidades')">
+                <label class="form-check-label" for="capaUnidades">Unidades</label>
+              </div>
+              <div class="form-check">
+                <input class="form-check-input" type="checkbox" value="Barrios" id="capaBarrios"
+                  onchange="toggleCapa('Barrios')">
+                <label class="form-check-label" for="capaBarrios">Barrios</label>
+              </div>
+              <div class="form-check">
+                <input class="form-check-input" type="checkbox" value="Construccion" id="capaConstruccion"
+                  onchange="toggleCapa('Construccion')">
+                <label class="form-check-label" for="capaConstruccion">Construcción</label>
+              </div>
+              <div class="form-check">
+                <input class="form-check-input" type="checkbox" value="Manzanas" id="capaManzanas"
+                  onchange="toggleCapa('Manzanas')">
+                <label class="form-check-label" for="capaManzanas">Manzanas</label>
+              </div>
+              <div class="form-check">
+                <input class="form-check-input" type="checkbox" value="ZonaHomogeneaFisicaUrbana"
+                  id="capaZonaHomogeneaFisicaUrbana" onchange="toggleCapa('ZonaHomogeneaFisicaUrbana')">
+                <label class="form-check-label" for="capaZonaHomogeneaFisicaUrbana">Zona Homogenea Fisica</label>
+              </div>
+              <div class="form-check">
+                <input class="form-check-input" type="checkbox" value="ZonaHomogeneaGeoeconomicaUrbana"
+                  id="capaZonaHomogeneaGeoeconomicaUrbana" onchange="toggleCapa('ZonaHomogeneaGeoeconomicaUrbana')">
+                <label class="form-check-label" for="capaZonaHomogeneaGeoeconomicaUrbana">Zona Homogenea
+                  Geoeconomica</label>
+              </div>
+              <div class="form-check">
+                <input class="form-check-input" type="checkbox" value="Comunas" id="capaComunas"
+                  onchange="toggleCapa('Comunas')">
+                <label class="form-check-label" for="capaComunas">Comunas</label>
+              </div>
+
+              <!-- -----------------------------capas rurales---------------------------------------------- -->
+              <label class="form-label mb-2  p-1 px-2  w-100 border-bottom fw-bold">Rural</label>
+
+              <div class="form-check text-start">
+                <input class="form-check-input" type="checkbox" value="TerrenoRural" id="capaTerrenoRural"
+                  onchange="toggleCapa('TerrenoRural')">
+                <label class="form-check-label" for="capaTerrenoRural">Terreno</label>
+              </div>
+              <div class="form-check text-start">
+                <input class="form-check-input" type="checkbox" value="ZonaHomogeneaFisicaRural"
+                  id="capaZonaHomogeneaFisicaRural" onchange="toggleCapa('ZonaHomogeneaFisicaRural')">
+                <label class="form-check-label" for="capaZonaHomogeneaFisicaRural">Zona Homogenea Fisica</label>
+              </div>
+              <div class="form-check text-start">
+                <input class="form-check-input" type="checkbox" value="ZonaHomogeneaGeoeconomicaRural"
+                  id="capaZonaHomogeneaGeoeconomicaRural" onchange="toggleCapa('ZonaHomogeneaGeoeconomicaRural')">
+                <label class="form-check-label" for="capaZonaHomogeneaGeoeconomicaRural">Zona Homogenea
+                  Geoeconomica</label>
+              </div>
+              <div class="form-check text-start">
+                <input class="form-check-input" type="checkbox" value="Vereda" id="capaVereda"
+                  onchange="toggleCapa('Vereda')">
+                <label class="form-check-label" for="capaVereda">Veredas</label>
+              </div>
+              <div class="form-check text-start">
+                <input class="form-check-input" type="checkbox" value="ConstruccionRural" id="capaConstruccionRural"
+                  onchange="toggleCapa('ConstruccionRural')">
+                <label class="form-check-label" for="capaConstruccionRural">Construcción</label>
+              </div>
+              <div class="form-check text-start">
+                <input class="form-check-input" type="checkbox" value="UnidadesRural" id="capaUnidadesRural"
+                  onchange="toggleCapa('UnidadesRural')">
+                <label class="form-check-label" for="capaUnidadesRural">Unidades</label>
+              </div>
+            </div>
+          </div>
+
+        </div>
+    </nav>
+
+    <!-- --------------------------------------------------------------------------------------
+    ------------------------------ Offcanvas Filtros para móvil ---------------------
+    --------------------------------------------------------------------------------------- -->
+
+    <div class="offcanvas offcanvas-start d-md-none" tabindex="-1" id="offcanvasFiltros"
+      aria-labelledby="offcanvasFiltrosLabel">
+      <div class="offcanvas-header" style="background-color: #002F55; color: #FEFEFE;">
+        <h5 class="offcanvas-title" id="offcanvasFiltrosLabel"><i class="bi bi-funnel-fill"></i> Filtros</h5>
+        <button type="button" class="btn-close text-reset bg-light" data-bs-dismiss="offcanvas"
+          aria-label="Cerrar"></button>
+      </div>
+      <div class="offcanvas-body" style="background-color: #002F55; color: #FEFEFE;">
+        <div class="d-flex flex-column align-items-center">
+          <label class="sb-nav-link-icon text-white" for="filtro-capa-movil">
+            <i class="bi bi-layers-fill"></i> Filtro por capas
+          </label>
+          <select id="filtro-capa-movil" onchange="actualizarCamposMovil()" class="form-select form-select-sm mt-2 "
+            style="width: 80%;">
+            <option value="" selected disabled>Elegir </option>
+            <option value="Terreno" class="fw-bold" style="color: #002F55;">Terreno</option>
+            <option value="Unidades" class="fw-bold" style="color: #002F55;">Unidades</option>
+            <option value="Barrios" class="fw-bold" style="color: #002F55;">Barrios</option>
+            <!-- <option value="Comunas" class="fw-bold" style="color: #002F55;">Comunas</option> -->
+            <option value="Construccion" class="fw-bold" style="color: #002F55;">Construcción</option>
+          </select>
+        </div>
+        <div class="d-flex flex-column align-items-center mt-4 gap-2">
+          <label class="sb-nav-link-icon text-white" for="filtro-campo-movil">
+            <i class="bi bi-filter-circle"></i> Campo:
+          </label>
+          <select id="filtro-campo-movil" onchange="actualizarValoresMovil()" style="width: 80%;"
+            class="form-select-sm"></select>
+          <input type="text" id="filtro-valor-movil" list="lista-valores-movil" placeholder="Valor..."
+            style="width: 80%;" class="form-select-sm">
+          <datalist id="lista-valores-movil"></datalist>
+          <button class="btn btn-outline-light btn-sm" style="width: 70%;" onclick="filtrarCapaMovil()">Buscar</button>
+          <button class="btn btn-outline-light btn-sm" style="width: 70%;"
+            onclick="limpiarFiltroMovil(); limpiarZona();">Limpiar
+            Filtros</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- <div id="panel-controles">
+      <div class="panel" id="zona-selector">
+        <div class="panel-title"><i class="fa-solid fa-map-location-dot"></i>Zona</div>
+        <label for="zona">Selecciona zona:</label>
+        <select id="zona" onchange="cargarZona()">
+          <option value="">-- Elegir --</option>
+        </select>
+        <button onclick="limpiarZona()">Limpiar zona</button>
+      </div>
+
+      <div class="panel" id="filtros">
+        <div class="panel-title"><i class="fa-solid fa-filter"></i>Filtros</div>
+        <label for="filtro-capa">Capa:</label>
+        <select id="filtro-capa" onchange="actualizarCampos()">
+          <option value="">-- Elegir --</option>
+          <option value="Terreno">Terreno</option>
+          <option value="Unidades">Unidades</option>
+          <option value="Barrios">Barrios</option>
+          <option value="Comunas">Comunas</option>
+        </select>
+
+        <label for="filtro-campo">Campo:</label>
+        <select id="filtro-campo" onchange="actualizarValores()"></select>
+
+        <input type="text" id="filtro-valor" list="lista-valores" placeholder="Valor...">
+        <datalist id="lista-valores"></datalist>
+
+        <button onclick="filtrarCapa()">Buscar</button>
+        <button onclick="limpiarFiltro()">Limpiar filtro</button>
+      </div>
+    </div> -->
+
+    <div class="container-fluid mb-2" style="flex: 1; display: flex; flex-direction: column; min-height: 0;">
+      <div class="row h-100">
+
+        <!-------------------------- Filtros panel izquierdo ------------------------------------------------------------>
+
+        <div class="d-none d-md-block col-md-2 col-lg-2 d-flex flex-column pe-0 ps-1" style="height: 100%;">
+          <div class="rounded-4 border p-3 px-2 flex-grow-1 d-flex flex-column gap-3 justify-content-start text-center"
+            style="background-color: #002F55; color: #FEFEFE; height: 100%; min-height: 0;">
+            <h1 class="d-flex justify-content-center gap-2 fs-6 mb-2 mt-3"> <i class="bi bi-funnel-fill"></i> Filtros
+            </h1>
+            <div class="d-flex flex-column align-items-center">
+              <label class="sb-nav-link-icon text-white" for="filtro-capa">
+                <i class="bi bi-layers-fill"></i> Filtro por capas
+              </label>
+              <select id="filtro-capa" onchange="actualizarCampos()" class="form-select form-select-sm mt-2 "
+                style="width: 80%;">
+                <option value="" selected disabled>Elegir</option>
+                <option value="" class="text-center" style="font-size: 0.8rem;" disabled>Capas Urbanas</option>
+                <option value="Terreno" class="fw-bold" style="color: #002F55;">Terreno</option>
+                <option value="Unidades" class="fw-bold" style="color: #002F55;">Unidades</option>
+                <option value="Barrios" class="fw-bold" style="color: #002F55;">Barrios</option>
+                <option value="Construccion" class="fw-bold" style="color: #002F55;">Construcción</option>
+                <option value="ZonaHomogeneaFisicaUrbana" class="fw-bold" style="color: #002F55;">Zn Hom. Fisica</option>
+                <option value="ZonaHomogeneaGeoeconomicaUrbana" class="fw-bold" style="color: #002F55;">Zn Hom. Geoeconomica</option>
+                <!-- <option value="Comunas" class="fw-bold" style="color: #002F55;">Comunas</option> -->
+                
+                <option value="" class="text-center" style="font-size: 0.8rem;" disabled>Capas Rurales</option>  
+                <option value="TerrenoRural" class="fw-bold" style="color: #002F55;">Terreno Rural</option>
+                <option value="UnidadesRural" class="fw-bold" style="color: #002F55;">Unidades Rurales</option>
+                <option value="ConstruccionRural" class="fw-bold" style="color: #002F55;">Construcciones Rurales </option>
+                <option value="Vereda" class="fw-bold" style="color: #002F55;">Veredas </option>
+                <option value="ZonaHomogeneaFisicaRural" class="fw-bold" style="color: #002F55;">Zn Hom. Fisica</option>
+                <option value="ZonaHomogeneaGeoeconomicaRural" class="fw-bold" style="color: #002F55;">Zn Hom. Geoeconomica</option>
+              </select>
+            </div>
+            <div class="d-flex flex-column align-items-center  gap-2">
+              <label class="sb-nav-link-icon text-white" for="filtro-campo">
+                <i class="bi bi-filter-circle"></i> Campo:
+              </label>
+              <select id="filtro-campo" onchange="actualizarValores()" style="width: 80%;"
+                class="form-select-sm"></select>
+              <input type="text" id="filtro-valor" list="lista-valores" placeholder="Valor..." style="width: 80%;"
+                class="form-select-sm">
+              <datalist id="lista-valores"></datalist>
+              <button class="btn btn-outline-light btn-sm" style="width: 70%;" onclick="filtrarCapa()">Buscar</button>
+              <button class="btn btn-outline-light btn-sm" style="width: 70%;" onclick="limpiarFiltro()">Limpiar
+                Filtros</button>
+            </div>
+
+            <!-------------------------------------- sección del mapita, ubicación  y Copyright ------------------------->
+            <div class=" mt-auto d-flex flex-column mb-2 justify-content-center"
+              style="background-color: #002F55; color: #FEFEFE;">
+              <div class="d-flex flex-column align-items-center ">
+                <div id="mapa2" style="width: 90%; height: 22vh;" class="rounded-3 mb-2"></div>
+                <small style="font-size: 0.7em;" id="ubicacion-municipio"> <i
+                    class="bi bi-crosshair mx-2"></i>Ubicación: Neiva-Huila</small>
+              </div>
+              <img src="assets/img/logo.png" alt="logo de Arbitrium" style="width: 6rem; margin: auto;">
+              <small class="text-center mx-1 fs-light" style="font-size: 0.4em;">
+                © Copyright <strong>Arbitrium SAS </strong> Visor ARBIMaps 2025</small>
+            </div>
+          </div>
+        </div>
+        <!-- Mapa panel derecho -->
+        <div class="col-md-10 col-lg-10 d-flex flex-column p-1" style="height: 100%;">
+          <div class="rounded-4 border flex-grow-1 d-flex flex-column justify-content-start"
+            style="background: #fff; height: 100%; min-height: 0; position: relative;">
+            <div id="map" style=" height: 100%; border-radius: 14px;"></div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+    </div>
+
+    <!-- --------------------------------------------------------------------------------------
+                              Modal para alerts
+ --------------------------------------------------------------------------------------- -->
+
+    <div class="modal fade" id="modalAlertaFiltro" tabindex="-1" aria-labelledby="modalAlertaFiltroLabel"
+      aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+          <div class="modal-header text-white" style="background-color: #002F55;">
+            <h5 class="modal-title" id="modalAlertaFiltroLabel">Atención</h5>
+            <button type="button" class="btn-close bg-white" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+          </div>
+          <div class="modal-body" id="modalAlertaFiltroBody">
+            <!-- Aquí va el mensaje -->
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn" style="background-color: #002F55; color: white;"
+              data-bs-dismiss="modal">Aceptar</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Modal Loader Terreno -->
+    <div class="modal fade" id="loader-Terreno" tabindex="-1" aria-labelledby="loaderTerrenoLabel" aria-hidden="true"
+      data-bs-backdrop="static" data-bs-keyboard="false">
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content border" style="background-color: #ffffff94; border-radius: 1.5rem">
+          <div class="modal-body d-flex flex-column align-items-center justify-content-center py-5">
+            <img src="assets/img/LogoArbi.png" alt="logo arbimaps" style="width: 60px;" class="mb-3">
+            <div class="spinner-border" style="width:2.5rem;height:2.5rem; color: #002F55;" role="status"></div>
+            <div class="mt-4 fw-bold text-center" style="color: #002F55; font-size:1.1rem;">Cargando, por favor
+              espera...</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js"></script>
+
+    <!-- <script src="js/app2.js"></script> -->
+    <script src="js/app.js"></script>
+    <script src="js/app3.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,169 @@
+html, body {
+  font-family: 'Poppins', sans-serif !important;
+}
+body {
+  margin: 0;
+  background: #e93a3a;
+  /* Prevenir zoom en móviles */
+  touch-action: pan-x pan-y;
+  -ms-touch-action: pan-x pan-y;
+}
+#map {
+  width: 100%;
+  border: 1px solid #002F55;
+  /* Configuraciones específicas para el mapa en móviles */
+  touch-action: none;
+  -ms-touch-action: none;
+}
+#panel-controles {
+  position: absolute;
+  font-family: 'Poppins', sans-serif;
+
+  top: 10px;
+  right: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  z-index: 1000;
+}
+#loader-terreno{
+  font-family: 'Poppins', sans-serif;
+
+}
+.img-arbi{
+ width: 2.7em;
+ 
+}
+.panel {
+  background: #ffffffee;
+  padding: 12px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.25);
+  border-radius: 10px;
+  backdrop-filter: blur(4px);
+  font-size: 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  min-width: 200px;
+}
+.panel label {
+  font-weight: bold;
+  margin-bottom: 2px;
+  color: #333;
+}
+.panel-title {
+  display: flex;
+  align-items: center;
+  font-weight: bold;
+  font-size: 15px;
+  color: #0078d4;
+  margin-bottom: 6px;
+}
+.panel-title i {
+  margin-right: 6px;
+  color: #0078d4;
+}
+select, input[type="text"], button {
+  padding: 6px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 13px;
+  outline: none;
+  transition: border-color 0.2s ease-in-out;
+}
+select:focus, input[type="text"]:focus {
+  border-color: #0078d4;
+}
+button {
+  cursor: pointer;
+  background-color: #0078d4;
+  color: white;
+  border: none;
+  font-weight: bold;
+  transition: background-color 0.2s;
+}
+button:hover {
+  background-color: #005fa3;
+}
+datalist option {
+  text-transform: capitalize;
+}
+
+
+/* Hover en la imagen cuando se hace hover al article */
+.capa-vista:hover img {
+  outline: 2px solid #002F55;
+}
+
+/* Hover en el texto cuando se hace hover al article */
+.capa-vista:hover small {
+  font-weight: bold;
+}
+
+/* Estado activo para la capa seleccionada */
+.capa-vista.activa {
+
+  border-radius: 8px;
+  padding: 4px;
+}
+
+.capa-vista.activa img {
+  border: 2px solid #002F55 !important;
+  box-shadow: 0 2px 8px rgba(0,47,85,0.3);
+}
+
+.capa-vista.activa small {
+  font-weight: bold !important;
+  color: #002F55 !important;
+}
+
+.capa-vista {
+  position: relative;
+  transition: all 0.2s ease;
+}
+
+/* Animaciones para el loader */
+#loader-terreno {
+  transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
+  opacity: 0;
+  transform: scale(0.9);
+  pointer-events: none;
+}
+
+#loader-terreno.show {
+  opacity: 1;
+  transform: scale(1);
+  pointer-events: all;
+}
+
+#loader-terreno.hide {
+  opacity: 0;
+  transform: scale(0.9);
+  pointer-events: none;
+}
+
+/* Animación del contenido interno del loader */
+#loader-terreno .loader-content {
+  transition: transform 0.4s ease-out;
+  transform: translateY(20px);
+}
+
+#loader-terreno.show .loader-content {
+  transform: translateY(0);
+}
+
+.leaflet-control-attribution {
+  font-size: 0.6em !important; /* o el tamaño que prefieras */
+  padding: 2px 4px !important;
+}
+
+#btn-seleccionar.active {
+  background-color: #fffb00 !important;
+}
+#btn-seleccionar.active i {
+  color: #002F55 !important;
+}
+
+
+
+
