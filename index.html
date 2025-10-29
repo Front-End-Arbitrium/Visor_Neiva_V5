@@ -12,6 +12,10 @@
   <link rel="stylesheet" href="style.css">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet">
+
+  <!-- ---------------importaciones para hacer que funcione el plugin de dibujo leaflet draw---------------- -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet-draw@1.0.4/dist/leaflet.draw.css">
+
 </head>
 
 <body style="height: 100vh; margin: 0; display: flex; flex-direction: column;">
@@ -135,94 +139,145 @@
 
             <!-- -----------------------------capas urbanas---------------------------------------------- -->
 
-            <div class="dropdown-menu p-3 w-100 w-md-auto dropdown-menu dropdown-menu-end rounded-3 "
-              aria-labelledby="dropdownCapas" style="min-width:220px;max-width:100vw;">
+            <div class="dropdown-menu p-2 w-100 w-md-auto dropdown-menu dropdown-menu-end rounded-3 "
+              aria-labelledby="dropdownCapas" style="min-width:220px;max-width:100vw;z-index: 99999;">
               <label class="form-label mb-2  text-white p-1 px-2 rounded-3 w-100"
                 style="background-color: #002F55; font-size: 0.9em;">Selecciona las capas:</label>
 
-              <p class="form-label mb-2  p-1 px-2  w-100 border-bottom fw-bold" id="labelUrbano">Urbano</p>
-              <div class="form-check">
-                <input class="form-check-input" type="checkbox" value="Terreno" id="capaTerreno"
-                  onchange="toggleCapa('Terreno')">
-                <label class="form-check-label" for="capaTerreno">Terreno</label>
-              </div>
-              <div class="form-check">
-                <input class="form-check-input" type="checkbox" value="Unidades" id="capaUnidades"
-                  onchange="toggleCapa('Unidades')">
-                <label class="form-check-label" for="capaUnidades">Unidades</label>
-              </div>
-              <div class="form-check">
-                <input class="form-check-input" type="checkbox" value="Barrios" id="capaBarrios"
-                  onchange="toggleCapa('Barrios')">
-                <label class="form-check-label" for="capaBarrios">Barrios</label>
-              </div>
-              <div class="form-check">
-                <input class="form-check-input" type="checkbox" value="Construccion" id="capaConstruccion"
-                  onchange="toggleCapa('Construccion')">
-                <label class="form-check-label" for="capaConstruccion">Construcción</label>
-              </div>
-              <div class="form-check">
-                <input class="form-check-input" type="checkbox" value="Manzanas" id="capaManzanas"
-                  onchange="toggleCapa('Manzanas')">
-                <label class="form-check-label" for="capaManzanas">Manzanas</label>
-              </div>
-              <div class="form-check">
-                <input class="form-check-input" type="checkbox" value="ZonaHomogeneaFisicaUrbana"
-                  id="capaZonaHomogeneaFisicaUrbana" onchange="toggleCapa('ZonaHomogeneaFisicaUrbana')">
-                <label class="form-check-label" for="capaZonaHomogeneaFisicaUrbana">Zona Homogenea Fisica</label>
-              </div>
-              <div class="form-check">
-                <input class="form-check-input" type="checkbox" value="ZonaHomogeneaGeoeconomicaUrbana"
-                  id="capaZonaHomogeneaGeoeconomicaUrbana" onchange="toggleCapa('ZonaHomogeneaGeoeconomicaUrbana')">
-                <label class="form-check-label" for="capaZonaHomogeneaGeoeconomicaUrbana">Zona Homogenea
-                  Geoeconomica</label>
-              </div>
-              <div class="form-check">
-                <input class="form-check-input" type="checkbox" value="Comunas" id="capaComunas"
-                  onchange="toggleCapa('Comunas')">
-                <label class="form-check-label" for="capaComunas">Comunas</label>
-              </div>
+              <div class="accordion" id="accordionCapas">
 
-              <!-- -----------------------------capas rurales---------------------------------------------- -->
-              <label class="form-label mb-2  p-1 px-2  w-100 border-bottom fw-bold">Rural</label>
+                <!-- Grupo 1: Capas Urbanas -->
+                <div class="accordion-item">
+                  <h2 class="accordion-header" id="headingUrbanas">
+                    <button class="accordion-button collapsed p-2 border-none" type="button" data-bs-toggle="collapse"
+                      data-bs-target="#collapseUrbanas" aria-expanded="false" style="font-size: 0.9rem;">
+                      Capas Urbanas
+                    </button>
+                  </h2>
+                  <div id="collapseUrbanas" class="accordion-collapse collapse" data-bs-parent="#accordionCapas">
+                    <div class="accordion-body p-3">
 
-              <div class="form-check text-start">
-                <input class="form-check-input" type="checkbox" value="TerrenoRural" id="capaTerrenoRural"
-                  onchange="toggleCapa('TerrenoRural')">
-                <label class="form-check-label" for="capaTerrenoRural">Terreno</label>
-              </div>
-              <div class="form-check text-start">
-                <input class="form-check-input" type="checkbox" value="ZonaHomogeneaFisicaRural"
-                  id="capaZonaHomogeneaFisicaRural" onchange="toggleCapa('ZonaHomogeneaFisicaRural')">
-                <label class="form-check-label" for="capaZonaHomogeneaFisicaRural">Zona Homogenea Fisica</label>
-              </div>
-              <div class="form-check text-start">
-                <input class="form-check-input" type="checkbox" value="ZonaHomogeneaGeoeconomicaRural"
-                  id="capaZonaHomogeneaGeoeconomicaRural" onchange="toggleCapa('ZonaHomogeneaGeoeconomicaRural')">
-                <label class="form-check-label" for="capaZonaHomogeneaGeoeconomicaRural">Zona Homogenea
-                  Geoeconomica</label>
-              </div>
-              <div class="form-check text-start">
-                <input class="form-check-input" type="checkbox" value="Vereda" id="capaVereda"
-                  onchange="toggleCapa('Vereda')">
-                <label class="form-check-label" for="capaVereda">Veredas</label>
-              </div>
-              <div class="form-check text-start">
-                <input class="form-check-input" type="checkbox" value="ConstruccionRural" id="capaConstruccionRural"
-                  onchange="toggleCapa('ConstruccionRural')">
-                <label class="form-check-label" for="capaConstruccionRural">Construcción</label>
-              </div>
-              <div class="form-check text-start">
-                <input class="form-check-input" type="checkbox" value="UnidadesRural" id="capaUnidadesRural"
-                  onchange="toggleCapa('UnidadesRural')">
-                <label class="form-check-label" for="capaUnidadesRural">Unidades</label>
+                      <div class="form-check">
+                        <input class="form-check-input" type="checkbox" value="Unidades" id="capaUnidades"
+                          onchange="toggleCapa('Unidades')">
+                        <label class="form-check-label" for="capaUnidades">Unidades</label>
+                      </div>
+
+                      <div class="form-check">
+                        <input class="form-check-input" type="checkbox" value="Construccion" id="capaConstruccion"
+                          onchange="toggleCapa('Construccion')">
+                        <label class="form-check-label" for="capaConstruccion">Construcción</label>
+                      </div>
+
+                      <div class="form-check">
+                        <input class="form-check-input" type="checkbox" value="Terreno" id="capaTerreno"
+                          onchange="toggleCapa('Terreno')">
+                        <label class="form-check-label" for="capaTerreno">Terreno</label>
+                      </div>
+
+                      <div class="form-check">
+                        <input class="form-check-input" type="checkbox" value="Manzanas" id="capaManzanas"
+                          onchange="toggleCapa('Manzanas')">
+                        <label class="form-check-label" for="capaManzanas">Manzanas</label>
+                      </div>
+
+                      <div class="form-check">
+                        <input class="form-check-input" type="checkbox" value="Barrios" id="capaBarrios"
+                          onchange="toggleCapa('Barrios')">
+                        <label class="form-check-label" for="capaBarrios">Barrios</label>
+                      </div>
+
+                      <div class="form-check">
+                        <input class="form-check-input" type="checkbox" value="Comunas" id="capaComunas"
+                          onchange="toggleCapa('Comunas')">
+                        <label class="form-check-label" for="capaComunas">Comunas</label>
+                      </div>
+
+                      <div class="form-check">
+                        <input class="form-check-input" type="checkbox" value="ZonaHomogeneaGeoeconomicaUrbana"
+                          id="capaZonaHomogeneaGeoeconomicaUrbana"
+                          onchange="toggleCapa('ZonaHomogeneaGeoeconomicaUrbana')">
+                        <label class="form-check-label" for="capaZonaHomogeneaGeoeconomicaUrbana">Zona Homogenea
+                          Geoeconomica</label>
+                      </div>
+
+                      <div class="form-check">
+                        <input class="form-check-input" type="checkbox" value="ZonaHomogeneaFisicaUrbana"
+                          id="capaZonaHomogeneaFisicaUrbana" onchange="toggleCapa('ZonaHomogeneaFisicaUrbana')">
+                        <label class="form-check-label" for="capaZonaHomogeneaFisicaUrbana">Zona Homogenea
+                          Fisica</label>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Grupo 2: Capas Rurales -->
+                <div class="accordion-item">
+                  <h2 class="accordion-header" id="headingRurales">
+                    <button class="accordion-button collapsed p-2" type="button" data-bs-toggle="collapse"
+                      data-bs-target="#collapseRurales" aria-expanded="false" style="font-size: 0.9rem;">
+                      Capas Rurales
+                    </button>
+                  </h2>
+                  <div id="collapseRurales" class="accordion-collapse collapse" data-bs-parent="#accordionCapas">
+                    <div class="accordion-body p-3">
+
+                      <div class="form-check text-start">
+                        <input class="form-check-input" type="checkbox" value="UnidadesRural" id="capaUnidadesRural"
+                          onchange="toggleCapa('UnidadesRural')">
+                        <label class="form-check-label" for="capaUnidadesRural">Unidades</label>
+                      </div>
+
+                      <div class="form-check text-start">
+                        <input class="form-check-input" type="checkbox" value="ConstruccionRural"
+                          id="capaConstruccionRural" onchange="toggleCapa('ConstruccionRural')">
+                        <label class="form-check-label" for="capaConstruccionRural">Construcción</label>
+                      </div>
+
+                      <div class="form-check text-start">
+                        <input class="form-check-input" type="checkbox" value="TerrenoRural" id="capaTerrenoRural"
+                          onchange="toggleCapa('TerrenoRural')">
+                        <label class="form-check-label" for="capaTerrenoRural">Terreno</label>
+                      </div>
+
+                      <div class="form-check text-start">
+                        <input class="form-check-input" type="checkbox" value="Vereda" id="capaVereda"
+                          onchange="toggleCapa('Vereda')">
+                        <label class="form-check-label" for="capaVereda">Veredas</label>
+                      </div>
+
+                      <div class="form-check text-start">
+                        <input class="form-check-input" type="checkbox" value="ZonaHomogeneaGeoeconomicaRural"
+                          id="capaZonaHomogeneaGeoeconomicaRural"
+                          onchange="toggleCapa('ZonaHomogeneaGeoeconomicaRural')">
+                        <label class="form-check-label" for="capaZonaHomogeneaGeoeconomicaRural">Zona Homogenea
+                          Geoeconomica</label>
+                      </div>
+
+                      <div class="form-check text-start">
+                        <input class="form-check-input" type="checkbox" value="ZonaHomogeneaFisicaRural"
+                          id="capaZonaHomogeneaFisicaRural" onchange="toggleCapa('ZonaHomogeneaFisicaRural')">
+                        <label class="form-check-label" for="capaZonaHomogeneaFisicaRural">Zona Homogenea
+                          Fisica</label>
+                      </div>
+
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
-          </div>
 
-        </div>
+          </div>
     </nav>
 
+
+    <script>
+      document.querySelectorAll('.dropdown-menu').forEach(menu => {
+        menu.addEventListener('click', e => {
+          e.stopPropagation();
+        });
+      });
+    </script>
     <!-- --------------------------------------------------------------------------------------
     ------------------------------ Offcanvas Filtros para móvil ---------------------
     --------------------------------------------------------------------------------------- -->
@@ -298,60 +353,77 @@
       </div>
     </div> -->
 
-    <div class="container-fluid mb-2" style="flex: 1; display: flex; flex-direction: column; min-height: 0;">
-      <div class="row h-100">
-
+    <div class="container-fluid mb-2 layout" style="flex: 1; display: flex; flex-direction: column; min-height: 0;">
+      <div class="row h-100 " style="display: flex; flex-wrap: nowrap;">
         <!-------------------------- Filtros panel izquierdo ------------------------------------------------------------>
-
-        <div class="d-none d-md-block col-md-2 col-lg-2 d-flex flex-column pe-0 ps-1" style="height: 100%;">
-          <div class="rounded-4 border p-3 px-2 flex-grow-1 d-flex flex-column gap-3 justify-content-start text-center"
+        <div id="panel_filtros" class="d-none d-md-block col-md-2 col-lg-2 d-flex flex-column pe-0 ps-1"
+          style="height: 100%;">
+          <div class="rounded-4 border p-2 flex-grow-1 d-flex flex-column gap-2 justify-content-start text-center"
             style="background-color: #002F55; color: #FEFEFE; height: 100%; min-height: 0;">
-            <h1 class="d-flex justify-content-center gap-2 fs-6 mb-2 mt-3"> <i class="bi bi-funnel-fill"></i> Filtros
+            <button id="boton_minimizar" class="ms-auto text-center p-0 bg-transparent "
+              style="cursor: pointer; height: 1.2em;">
+              <i class="btn_minimizar bi bi-arrow-left-circle" style="font-size: 0.8em;"></i>
+            </button>
+            <h1 class="d-flex justify-content-center gap-2 fs-6 mb-2 ">
+              <i class="bi bi-funnel-fill"></i> Filtros
             </h1>
             <div class="d-flex flex-column align-items-center">
-              <label class="sb-nav-link-icon text-white" for="filtro-capa">
+              <label class="sb-nav-link-icon text-white" style="font-size: 0.8em;" for="filtro-capa">
                 <i class="bi bi-layers-fill"></i> Filtro por capas
               </label>
               <select id="filtro-capa" onchange="actualizarCampos()" class="form-select form-select-sm mt-2 "
-                style="width: 80%;">
+                style="width: 90%;">
                 <option value="" selected disabled>Elegir</option>
                 <option value="" class="text-center" style="font-size: 0.8rem;" disabled>Capas Urbanas</option>
                 <option value="Terreno" class="fw-bold" style="color: #002F55;">Terreno</option>
                 <option value="Unidades" class="fw-bold" style="color: #002F55;">Unidades</option>
                 <option value="Barrios" class="fw-bold" style="color: #002F55;">Barrios</option>
                 <option value="Construccion" class="fw-bold" style="color: #002F55;">Construcción</option>
-                <option value="ZonaHomogeneaFisicaUrbana" class="fw-bold" style="color: #002F55;">Zn Hom. Fisica</option>
-                <option value="ZonaHomogeneaGeoeconomicaUrbana" class="fw-bold" style="color: #002F55;">Zn Hom. Geoeconomica</option>
+                <option value="ZonaHomogeneaFisicaUrbana" class="fw-bold" style="color: #002F55;">Zn Hom. Fisica
+                </option>
+                <option value="ZonaHomogeneaGeoeconomicaUrbana" class="fw-bold" style="color: #002F55;">Zn Hom.
+                  Geoeconomica</option>
                 <!-- <option value="Comunas" class="fw-bold" style="color: #002F55;">Comunas</option> -->
-                
-                <option value="" class="text-center" style="font-size: 0.8rem;" disabled>Capas Rurales</option>  
+
+                <option value="" class="text-center" style="font-size: 0.8rem;" disabled>Capas Rurales</option>
                 <option value="TerrenoRural" class="fw-bold" style="color: #002F55;">Terreno Rural</option>
                 <option value="UnidadesRural" class="fw-bold" style="color: #002F55;">Unidades Rurales</option>
-                <option value="ConstruccionRural" class="fw-bold" style="color: #002F55;">Construcciones Rurales </option>
+                <option value="ConstruccionRural" class="fw-bold" style="color: #002F55;">Construcciones Rurales
+                </option>
                 <option value="Vereda" class="fw-bold" style="color: #002F55;">Veredas </option>
                 <option value="ZonaHomogeneaFisicaRural" class="fw-bold" style="color: #002F55;">Zn Hom. Fisica</option>
-                <option value="ZonaHomogeneaGeoeconomicaRural" class="fw-bold" style="color: #002F55;">Zn Hom. Geoeconomica</option>
+                <option value="ZonaHomogeneaGeoeconomicaRural" class="fw-bold" style="color: #002F55;">Zn Hom.
+                  Geoeconomica</option>
               </select>
             </div>
             <div class="d-flex flex-column align-items-center  gap-2">
-              <label class="sb-nav-link-icon text-white" for="filtro-campo">
+              <label class="sb-nav-link-icon text-white" style="font-size: 0.8em;" for="filtro-campo">
                 <i class="bi bi-filter-circle"></i> Campo:
               </label>
-              <select id="filtro-campo" onchange="actualizarValores()" style="width: 80%;"
+              <select id="filtro-campo" onchange="actualizarValores()" style="width: 90%;"
                 class="form-select-sm"></select>
-              <input type="text" id="filtro-valor" list="lista-valores" placeholder="Valor..." style="width: 80%;"
+              <input type="text" id="filtro-valor" list="lista-valores" placeholder="Valor..." style="width: 90%;"
                 class="form-select-sm">
               <datalist id="lista-valores"></datalist>
-              <button class="btn btn-outline-light btn-sm" style="width: 70%;" onclick="filtrarCapa()">Buscar</button>
-              <button class="btn btn-outline-light btn-sm" style="width: 70%;" onclick="limpiarFiltro()">Limpiar
+              <button class="btn btn-outline-light btn-sm" style="width: 80%;" onclick="filtrarCapa()">Buscar</button>
+              <button class="btn btn-outline-light btn-sm" style="width: 80%;" onclick="limpiarFiltro()">Limpiar
                 Filtros</button>
+            </div>
+
+            <!-- sección para generar la leyenda dinámica según las capas que se vayan activando ------------- -->
+
+            <div id="leyenda" class="mt-3 mx-1 p-2 rounded-2 border bg-light text-dark">
+              <h6 class="text-center mb-2 pb-2 fw-bold" style="font-size: smaller; border-bottom: 1px solid #002F55;">
+                <i class="bi bi-palette-fill"></i> Convenciones
+              </h6>
+              <div id="leyenda-contenido" class="d-flex flex-column gap-2"></div>
             </div>
 
             <!-------------------------------------- sección del mapita, ubicación  y Copyright ------------------------->
             <div class=" mt-auto d-flex flex-column mb-2 justify-content-center"
               style="background-color: #002F55; color: #FEFEFE;">
-              <div class="d-flex flex-column align-items-center ">
-                <div id="mapa2" style="width: 90%; height: 22vh;" class="rounded-3 mb-2"></div>
+              <div id="Seccionmapita" class="d-flex flex-column align-items-center">
+                <div id="mapa2" style="width: 98%; height: 18vh;" class="rounded-3 mb-2"></div>
                 <small style="font-size: 0.7em;" id="ubicacion-municipio"> <i
                     class="bi bi-crosshair mx-2"></i>Ubicación: Neiva-Huila</small>
               </div>
@@ -362,16 +434,29 @@
           </div>
         </div>
         <!-- Mapa panel derecho -->
-        <div class="col-md-10 col-lg-10 d-flex flex-column p-1" style="height: 100%;">
+        <div id="col-mapa" class="d-flex flex-column p-1 " style="height: 100%;">
           <div class="rounded-4 border flex-grow-1 d-flex flex-column justify-content-start"
             style="background: #fff; height: 100%; min-height: 0; position: relative;">
             <div id="map" style=" height: 100%; border-radius: 14px;"></div>
-
+            <!-- panel de información que reemplaza al popup tradicional de leaflet -->
+            <aside id="panel-info" class="panel-info">
+              <button id="panel-info-close">
+                <i class="bi bi-x-lg m-0 p-0 " style="color: #ffffff;"></i>
+              </button>
+              <div class="panel-info-content"></div>
+            </aside>
+            <!-- panel para mostrar elementos con relación cuando se da click en un terreno -->
+            <!-- <aside id="panel-info-dos" class="panel-info-dos">
+              <button id="panel-info-close">
+                <i class="bi bi-x-lg m-0 p-0 " style="color: #ffffff;"></i>
+              </button>
+              <div class="panel-info-content-dos"></div>
+            </aside> -->
           </div>
         </div>
       </div>
     </div>
-    </div>
+
 
     <!-- --------------------------------------------------------------------------------------
                               Modal para alerts
@@ -412,6 +497,17 @@
 
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js"></script>
+
+    <!-- ---------------------------importaciones para la función de mediciones--------------------------l -->
+    <script src="https://unpkg.com/leaflet-draw@1.0.4/dist/leaflet.draw.js"></script>
+    <!-- si necesitas GeometryUtil aparte: -->
+    <script src="https://unpkg.com/leaflet-geometryutil@0.10.0/src/leaflet.geometryutil.js"></script>
+    <script src="https://unpkg.com/leaflet-draw@1.0.4/src/ext/GeometryUtil.js"></script>
+    <script src="https://unpkg.com/leaflet-draw@1.0.4/src/ext/LatLngUtil.js"></script>
+    <script src="https://unpkg.com/leaflet-draw@1.0.4/src/ext/TouchEvents.js"></script>
+    <script src="https://unpkg.com/leaflet-snap/leaflet.snap.js"></script>
+    <script src="https://unpkg.com/leaflet-snap/leaflet.drawsnapping.js"></script>
+
 
     <!-- <script src="js/app2.js"></script> -->
     <script src="js/app.js"></script>

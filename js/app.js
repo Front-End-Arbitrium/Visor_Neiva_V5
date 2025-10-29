@@ -30,14 +30,14 @@ const visores = {
     zoom: 12,
     capas: {
       // --------------------------Capas Urbanas----------------------------------------
-      Terreno: { archivo: "https://pub-5aa38eced5964a798d34f7f21717fc5f.r2.dev/DataNeivaV5/TerrenoUrbano.geojson", estilo: { color: 'red', weight: 0.6, fillOpacity: 0.2 }, minZoom: 17, maxZoom: 22 },
-      Barrios: { archivo: "https://pub-5aa38eced5964a798d34f7f21717fc5f.r2.dev/DataNeivaV4/Barrios.geojson", estilo: { color: 'green', weight: 0.6, fillOpacity: 0.2 }, minZoom: 0, maxZoom: 22 },
-      Construccion: { archivo: "https://pub-5aa38eced5964a798d34f7f21717fc5f.r2.dev/DataNeivaV5/ConstruccionUrbana.geojson", estilo: { color: 'blue', weight: 0.6, fillOpacity: 0.2 }, minZoom: 18, maxZoom: 22 },
-      Unidades: { archivo: "https://pub-5aa38eced5964a798d34f7f21717fc5f.r2.dev/DataNeivaV5/UnidadesUrbano.geojson", estilo: { color: 'black', weight: 0.6, fillOpacity: 0.2 }, minZoom: 17, maxZoom: 24 },
-      Manzanas: { archivo: "https://pub-5aa38eced5964a798d34f7f21717fc5f.r2.dev/DataNeivaV4/Manzanas.geojson", estilo: { color: 'black', fillColor: 'orange', weight: 0.8, fillOpacity: 0.2, dashArray: '2' }, minZoom: 0, maxZoom: 20 },
-      ZonaHomogeneaFisicaUrbana: { archivo: "https://pub-5aa38eced5964a798d34f7f21717fc5f.r2.dev/DataNeivaV5/zona_HomogeneafisicaUrbano.geojson", estilo: { color: 'grey', fillColor: 'orange', weight: 0.6, fillOpacity: 0.2 }, minZoom: 0, maxZoom: 22 },
-      ZonaHomogeneaGeoeconomicaUrbana: { archivo: "https://pub-5aa38eced5964a798d34f7f21717fc5f.r2.dev/DataNeivaV5/zona_HomogeneoEconomicaUrbana.geojson", estilo: { color: 'blue', weight: 0.6, fillOpacity: 0.2 }, minZoom: 0, maxZoom: 22 },
-      Comunas: { archivo: "https://pub-5aa38eced5964a798d34f7f21717fc5f.r2.dev/data/comunas.geojson", estilo: { color: 'black', fillColor: 'orange', weight: 0.8, fillOpacity: 0.2, dashArray: '2' }, minZoom: 0, maxZoom: 20 },
+      Terreno: { archivo: "https://pub-5aa38eced5964a798d34f7f21717fc5f.r2.dev/DataNeivaV5/TerrenoUrbano.geojson", estilo: { color: 'red', weight: 0.6, fillOpacity: 0.2, leyenda: '#F52C07' }, minZoom: 17, maxZoom: 24 },
+      Barrios: { archivo: "https://pub-5aa38eced5964a798d34f7f21717fc5f.r2.dev/DataNeivaV4/Barrios.geojson", estilo: { color: 'green', weight: 0.6, fillOpacity: 0.2, leyenda: '#abab87ff' }, minZoom: 0, maxZoom: 22 },
+      Construccion: { archivo: "https://pub-5aa38eced5964a798d34f7f21717fc5f.r2.dev/DataNeivaV5/ConstruccionUrbana.geojson", estilo: { color: 'blue', weight: 0.6, fillOpacity: 0.2, leyenda: '#0747f5ff' }, minZoom: 18, maxZoom: 22 },
+      Unidades: { archivo: "https://pub-5aa38eced5964a798d34f7f21717fc5f.r2.dev/DataNeivaV5/UnidadesUrbano.geojson", estilo: { color: 'black', weight: 0.6, fillOpacity: 0.2, leyenda: '#250702ff' }, minZoom: 17, maxZoom: 24 },
+      Manzanas: { archivo: "https://pub-5aa38eced5964a798d34f7f21717fc5f.r2.dev/DataNeivaV4/Manzanas.geojson", estilo: { color: 'black', fillColor: 'orange', weight: 0.8, fillOpacity: 0.2, dashArray: '2', leyenda: '#f58607ff' }, minZoom: 0, maxZoom: 20 },
+      ZonaHomogeneaFisicaUrbana: { archivo: "https://pub-5aa38eced5964a798d34f7f21717fc5f.r2.dev/DataNeivaV5/zona_HomogeneafisicaUrbano.geojson", estilo: { color: 'grey', fillColor: 'orange', weight: 0.6, fillOpacity: 0.2, leyenda: '#d07309ff' }, minZoom: 0, maxZoom: 22 },
+      ZonaHomogeneaGeoeconomicaUrbana: { archivo: "https://pub-5aa38eced5964a798d34f7f21717fc5f.r2.dev/DataNeivaV5/zona_HomogeneoEconomicaUrbana.geojson", estilo: { color: 'blue', weight: 0.6, fillOpacity: 0.2, leyenda: '#092ad0ff' }, minZoom: 0, maxZoom: 22 },
+      Comunas: { archivo: "https://pub-5aa38eced5964a798d34f7f21717fc5f.r2.dev/data/comunas.geojson", estilo: { color: 'black', fillColor: 'orange', weight: 0.8, fillOpacity: 0.2, dashArray: '2', leyenda: '#d07309af' }, minZoom: 0, maxZoom: 20 },
       Comuna1: { archivo: "https://pub-5aa38eced5964a798d34f7f21717fc5f.r2.dev/data/manzanas_Comuna_1.geojson", estilo: { color: 'black', weight: 0.6, fillOpacity: 0.2 }, minZoom: 0, maxZoom: 15 },
       Comuna2: { archivo: "https://pub-5aa38eced5964a798d34f7f21717fc5f.r2.dev/data/manzanas_Comuna_2.geojson", estilo: { color: 'black', weight: 0.6, fillOpacity: 0.2 }, minZoom: 0, maxZoom: 15 },
       Comuna3: { archivo: "https://pub-5aa38eced5964a798d34f7f21717fc5f.r2.dev/data/manzanas_Comuna_3.geojson", estilo: { color: 'black', weight: 0.6, fillOpacity: 0.2 }, minZoom: 0, maxZoom: 15 },
@@ -51,12 +51,12 @@ const visores = {
 
       // ------------------------------------Capas Rurales----------------------------------------
 
-      ZonaHomogeneaFisicaRural: { archivo: "https://pub-5aa38eced5964a798d34f7f21717fc5f.r2.dev/DataNeivaV5/zona_HomogeneoFisicaRural.geojson", estilo: { color: 'orange', weight: 0.6, fillOpacity: 0.2 }, minZoom: 0, maxZoom: 22 },
-      ZonaHomogeneaGeoeconomicaRural: { archivo: "https://pub-5aa38eced5964a798d34f7f21717fc5f.r2.dev/DataNeivaV5/zona_HomogenenaEconomicaRural.geojson", estilo: { color: 'blue', weight: 0.6, fillOpacity: 0.2 }, minZoom: 0, maxZoom: 22 },
-      Vereda: { archivo: "https://pub-5aa38eced5964a798d34f7f21717fc5f.r2.dev/DataNeivaV4/Veredas.geojson", estilo: { color: 'red', weight: 0.6, fillOpacity: 0.2 }, minZoom: 0, maxZoom: 22 },
-      ConstruccionRural: { archivo: "https://pub-5aa38eced5964a798d34f7f21717fc5f.r2.dev/DataNeivaV5/ConstruccionRural.geojson", estilo: { color: 'blue', weight: 0.6, fillOpacity: 0.2 }, minZoom: 0, maxZoom: 22 },
-      TerrenoRural: { archivo: "https://pub-5aa38eced5964a798d34f7f21717fc5f.r2.dev/DataNeivaV5/TerrenoRural.geojson", estilo: { color: 'red', weight: 0.6, fillOpacity: 0.2 }, minZoom: 0, maxZoom: 22 },
-      UnidadesRural: { archivo: "https://pub-5aa38eced5964a798d34f7f21717fc5f.r2.dev/DataNeivaV5/UnidadesRural.geojson", estilo: { color: 'black', weight: 0.6, fillOpacity: 0.2 }, minZoom: 0, maxZoom: 22 }
+      ZonaHomogeneaFisicaRural: { archivo: "https://pub-5aa38eced5964a798d34f7f21717fc5f.r2.dev/DataNeivaV5/zona_HomogeneoFisicaRural.geojson", estilo: { color: 'orange', weight: 0.6, fillOpacity: 0.2, leyenda: '#FBBC4A' }, minZoom: 0, maxZoom: 22 },
+      ZonaHomogeneaGeoeconomicaRural: { archivo: "https://pub-5aa38eced5964a798d34f7f21717fc5f.r2.dev/DataNeivaV5/zona_HomogenenaEconomicaRural.geojson", estilo: { color: 'blue', weight: 0.6, fillOpacity: 0.2, leyenda: '#1E1DFC' }, minZoom: 0, maxZoom: 22 },
+      Vereda: { archivo: "https://pub-5aa38eced5964a798d34f7f21717fc5f.r2.dev/DataNeivaV4/Veredas.geojson", estilo: { color: 'red', weight: 0.6, fillOpacity: 0.2, leyenda: '#EC8F8D' }, minZoom: 0, maxZoom: 22 },
+      ConstruccionRural: { archivo: "https://pub-5aa38eced5964a798d34f7f21717fc5f.r2.dev/DataNeivaV5/ConstruccionRural.geojson", estilo: { color: 'blue', weight: 0.6, fillOpacity: 0.2, leyenda: '#4946dfff' }, minZoom: 0, maxZoom: 22 },
+      TerrenoRural: { archivo: "https://pub-5aa38eced5964a798d34f7f21717fc5f.r2.dev/DataNeivaV5/TerrenoRural.geojson", estilo: { color: 'red', weight: 0.6, fillOpacity: 0.2, leyenda: '#FB1515' }, minZoom: 0, maxZoom: 22 },
+      UnidadesRural: { archivo: "https://pub-5aa38eced5964a798d34f7f21717fc5f.r2.dev/DataNeivaV5/UnidadesRural.geojson", estilo: { color: 'black', weight: 0.6, fillOpacity: 0.2, leyenda: '#817F7C' }, minZoom: 0, maxZoom: 22 }
     }
     // capas: {
     //   Terreno: { archivo: "/data/TerrenoFinal.geojson", estilo: { color: 'red', weight: 0.6, fillOpacity: 0.2 }, minZoom: 17, maxZoom: 22 },
@@ -119,24 +119,151 @@ const map = L.map('map', {
   layers: [vial]
 });
 
-// ===============
-// PATRONES RAYADOS PARA CAPAS
-// ===============
-// const patronUnidades = new L.StripePattern({
-//   weight: 4,
-//   spaceWeight: 6,
-//   color: '#ff6600', // naranja llamativo
-//   opacity: 0.7,
-//   angle: 45
-// }).addTo(map);
+// Ajusta textos sin borrar el resto de propiedades // propiedades para poder dibujar y medir polígonos.
+L.drawLocal.draw.toolbar.actions.title = 'Cancelar medición';
+L.drawLocal.draw.toolbar.actions.text = 'Cancelar';
+L.drawLocal.draw.toolbar.finish.title = 'Finalizar medición';
+L.drawLocal.draw.toolbar.finish.text = 'Terminar';
+L.drawLocal.draw.toolbar.undo.title = 'Eliminar último punto';
+L.drawLocal.draw.toolbar.undo.text = 'Deshacer';
+L.drawLocal.draw.toolbar.buttons.polygon = 'Medir polígono';
 
-// const patronConstruccion = new L.StripePattern({
-//   weight: 4,
-//   spaceWeight: 6,
-//   color: '#0066ff', // azul llamativo
-//   opacity: 0.7,
-//   angle: 135
-// }).addTo(map);
+L.drawLocal.draw.handlers.polygon.tooltip.start = 'Haz clic para comenzar a medir';
+L.drawLocal.draw.handlers.polygon.tooltip.cont = 'Continúa marcando los vértices';
+L.drawLocal.draw.handlers.polygon.tooltip.end = 'Haz doble clic para cerrar el polígono';
+
+L.drawLocal.edit.toolbar.actions.save.title = 'Guardar cambios';
+L.drawLocal.edit.toolbar.actions.save.text = 'Guardar';
+L.drawLocal.edit.toolbar.actions.cancel.title = 'Cancelar edición';
+L.drawLocal.edit.toolbar.actions.cancel.text = 'Cancelar';
+L.drawLocal.edit.toolbar.actions.clearAll.title = 'Eliminar mediciones';
+L.drawLocal.edit.toolbar.actions.clearAll.text = 'Eliminar todo';
+L.drawLocal.edit.toolbar.buttons.remove = 'Eliminar mediciones';
+L.drawLocal.edit.toolbar.buttons.removeDisabled = 'No hay mediciones para eliminar';
+L.drawLocal.edit.handlers.remove.tooltip.text = 'Haz clic sobre una medición para eliminarla';
+
+L.drawLocal.draw.toolbar.buttons.polyline = 'Medir línea';
+L.drawLocal.draw.handlers.polyline.tooltip.start = 'Haz clic para iniciar la línea';
+L.drawLocal.draw.handlers.polyline.tooltip.cont = 'Haz clic para continuar';
+L.drawLocal.draw.handlers.polyline.tooltip.end = 'Haz doble clic para terminar';
+
+
+
+// Capa temporal para guardar el polígono de medición
+const capaMedicion = L.featureGroup().addTo(map);
+const capasSnap = L.featureGroup().addTo(map);
+
+// Configurar control de dibujo solo para polígonos
+const controlMedicion = new L.Control.Draw({
+  position: 'topright',
+  draw: {
+    polygon: {
+      allowIntersection: false,
+      showArea: true,           // usa calc interno de Leaflet.Draw
+      metric: true,
+      precision: { metric: 2 },
+      guideLayers: [capasSnap],
+      snapDistance: 12,       // píxeles de tolerancia
+      snapVertices: true,
+      shapeOptions: {
+        color: '#ff6f00',
+        weight: 2,
+        fillOpacity: 0.2
+      }
+    },
+    polyline: {
+      shapeOptions: {
+        color: '#fa0707ff',
+        weight: 4
+      },
+      metric: true,
+      precision: { metric: 2 },
+      showLength: true,
+      guideLayers: [capasSnap],
+      snapDistance: 12,       // píxeles de tolerancia
+      snapVertices: true
+    },
+    rectangle: false,
+    circle: false,
+    marker: false,
+    circlemarker: false
+  },
+  edit: {
+    featureGroup: capaMedicion,
+    edit: false,       // evita ediciones; si las permites, cambia a true
+    remove: true
+  }
+});
+map.addControl(controlMedicion);
+
+// const botonLinea = toolbar.querySelector('.leaflet-draw-draw-polyline');
+// if (botonLinea) {
+//   botonLinea.innerHTML = '<i class="bi bi-ruler fs-5"></i>';
+//   botonLinea.setAttribute('title', 'Medir distancia');
+// }
+
+// map.on(L.Draw.Event.TOOLBAROPENED, () => {
+//   ['polygon', 'polyline'].forEach((mode) => {
+//     const handler = controlMedicion._toolbars.draw._modes[mode]?.handler;
+//     if (handler?.setOptions) {
+//       handler.setOptions({
+//         guideLayers: [capasSnap],
+//         snapDistance: 15,
+//         snapVertices: true
+//       });
+//     }
+//   });
+// });
+
+function formatearMedicion(areaM2, perimetroM) {
+  const areaMetros = (areaM2).toFixed(2);
+  const perimetro = perimetroM.toFixed(1);
+  return `<h6>Medición del polígono:</h6>
+          <strong>Área:</strong> ${areaMetros} m2<br>
+          <strong>Perímetro:</strong> ${perimetro} m`;
+}
+
+map.on(L.Draw.Event.CREATED, (evento) => {
+  const { layer, layerType } = evento;
+
+  // Limita a una medición a la vez
+  capaMedicion.clearLayers();
+  capaMedicion.addLayer(layer);
+
+  if (layerType === 'polygon') {
+    const latlngs = layer.getLatLngs()[0];
+    const area = L.GeometryUtil.geodesicArea(latlngs);
+    let perimetro = 0;
+    for (let i = 0; i < latlngs.length; i++) {
+      const actual = latlngs[i];
+      const siguiente = latlngs[(i + 1) % latlngs.length];
+      perimetro += actual.distanceTo(siguiente);
+    }
+    const mensaje = `
+                      <h6>Medición del polígono:</h6>
+                      <strong>Área:</strong> ${area.toFixed(2)} m²<br>
+                     <strong>Perímetro:</strong> ${perimetro.toFixed(1)} m`;
+    layer.bindPopup(mensaje).openPopup();
+    mostrarAlertaFiltro(mensaje);
+
+  } else if (layerType === 'polyline') {
+    const latlngs = layer.getLatLngs();
+    let longitud = 0;
+    for (let i = 1; i < latlngs.length; i++) {
+      longitud += latlngs[i - 1].distanceTo(latlngs[i]);
+    }
+    const mensaje = `
+                      <h6>Medición de la Polilínea:</h6>
+                    <strong>Longitud:</strong> ${longitud.toFixed(2)} m`;
+    layer.bindPopup(mensaje).openPopup();
+    mostrarAlertaFiltro(mensaje);
+  }
+});
+
+// Limpia la medición si el usuario elimina el polígono desde el control
+map.on(L.Draw.Event.DELETED, () => {
+  capaMedicion.clearLayers();
+});
 
 
 // Habilitar/deshabilitar checkboxes de capas según el zoom
@@ -170,6 +297,110 @@ L.control.scale({ position: 'bottomleft' }).addTo(map);
 let capasVisibles = {};
 let geojsonOriginal = {};
 
+const clavesRelacionPorCapa = {
+  Terreno: 'PREDIOS_id_operaci',
+  TerrenoRural: 'PREDIOS_id_operaci',
+  Construccion: 'PREDIOS_id_operaci',
+  ConstruccionRural: 'PREDIOS_id_operaci',
+  Unidades: 'id_operacion',
+  UnidadesRural: 'id_operacion'
+};
+
+const relacionesPorCapa = {
+  Terreno: {
+    clave: 'PREDIOS_id_operaci',
+    titulo: 'Resumen de elementos de terreno seleccionado',
+    relacionadas: [
+      {
+        capa: 'Construccion',
+        etiqueta: 'Construcciones urbanas',
+        camposResumen: [
+          { propiedad: 'name', etiqueta: 'Numero predial' },
+          { propiedad: 'area_const', etiqueta: 'Area (m2)' },
+          { propiedad: 'tipo_const', etiqueta: 'Tipo' }
+        ],
+        maxResultados: 6
+      },
+      {
+        capa: 'Unidades',
+        etiqueta: 'Unidades urbanas',
+        camposResumen: [
+          { propiedad: 'name', etiqueta: 'Numero predial' },
+          { propiedad: 'area_const', etiqueta: 'Area (m2)' },
+          { propiedad: 'planta_ubi', etiqueta: 'Planta' }
+        ],
+        maxResultados: 6
+      }
+    ]
+  },
+  TerrenoRural: {
+    clave: 'PREDIOS_id_operaci',
+    titulo: 'Resumen de elementos de terreno seleccionado',
+    relacionadas: [
+      {
+        capa: 'ConstruccionRural',
+        etiqueta: 'Construcciones rurales',
+        camposResumen: [
+          { propiedad: 'name', etiqueta: 'Numero predial' },
+          { propiedad: 'area_const', etiqueta: 'Area (m2)' },
+          { propiedad: 'numero_pis', etiqueta: 'Pisos' }
+        ],
+        maxResultados: 6
+      },
+      {
+        capa: 'UnidadesRural',
+        etiqueta: 'Unidades rurales',
+        camposResumen: [
+          { propiedad: 'name', etiqueta: 'Numero predial' },
+          { propiedad: 'area_const', etiqueta: 'Area (m2)' },
+          { propiedad: 'planta_ubi', etiqueta: 'Planta' }
+        ],
+        maxResultados: 6
+      }
+    ]
+  }
+};
+
+const indicesCapasRelacion = {};
+
+function asegurarIndiceRelacion(nombreCapa) {
+  if (indicesCapasRelacion[nombreCapa]) return;
+  const propiedadClave = clavesRelacionPorCapa[nombreCapa];
+  const datos = geojsonOriginal[nombreCapa];
+  if (!propiedadClave || !datos || !Array.isArray(datos.features)) return;
+  const indice = new Map();
+  datos.features.forEach((feature) => {
+    const valor = feature?.properties?.[propiedadClave];
+    if (valor === null || valor === undefined) return;
+    const llave = String(valor).trim();
+    if (!llave) return;
+    if (!indice.has(llave)) {
+      indice.set(llave, []);
+    }
+    indice.get(llave).push(feature);
+  });
+  indicesCapasRelacion[nombreCapa] = indice;
+}
+
+function obtenerRelacionesPorValor(nombreCapa, valor) {
+  if (valor === null || valor === undefined) return [];
+  const llave = String(valor).trim();
+  if (!llave) return [];
+  asegurarIndiceRelacion(nombreCapa);
+  const indice = indicesCapasRelacion[nombreCapa];
+  if (!indice) return [];
+  return indice.get(llave) || [];
+}
+
+function prepararIndicesCapasRelacionales() {
+  const capas = new Set();
+  Object.keys(relacionesPorCapa).forEach((base) => {
+    capas.add(base);
+    relacionesPorCapa[base].relacionadas.forEach((rel) => capas.add(rel.capa));
+  });
+  capas.forEach((nombre) => asegurarIndiceRelacion(nombre));
+}
+
 
 // ==========================
 // CARGA DE CAPAS GEOJSON
@@ -198,6 +429,7 @@ for (const nombre in configVisor.capas) {
 }
 
 Promise.all(cargarCapas).then(() => {
+  prepararIndicesCapasRelacionales();
   // Marcar el checkbox de Barrios 
   const checkboxBarrios = document.getElementById('capaBarrios');
   if (checkboxBarrios) checkboxBarrios.checked = true;
@@ -221,8 +453,8 @@ Promise.all(cargarCapas).then(() => {
 
 function generarPopup(feature, nombreCapa) {
   if (nombreCapa === 'Terreno') {
-    return `<h6 style="border-bottom: 1px solid grey; padding-bottom: 5px;"><strong>Info. Terreno</strong></h6>
-             <strong>Identificador:</strong> ${feature.properties.PREDIOS_id_operaci}<br>
+    return `<h6 class="text-center" style="border-bottom: 1px solid grey;  padding-bottom: 5px;"><strong>Info. Terreno</strong></h6>
+            <strong>Identificador:</strong> ${feature.properties.PREDIOS_id_operaci}<br>
             <strong>Área de terreno:</strong> ${feature.properties.area_terre} m² <br>
             <strong>Número predial:</strong> ${feature.properties.name} <br>
             <strong>Matrícula Inmobiliaria:</strong> ${feature.properties.PREDIOS_matricula_} <br>
@@ -231,38 +463,38 @@ function generarPopup(feature, nombreCapa) {
             <strong>Dirección:</strong> ${feature.properties.Direccion} <br>
             <strong>Condición del predio:</strong> ${feature.properties.PREDIOS_condicion_}`;
   } else if (nombreCapa === 'Unidades') {
-    return `<h6 style="border-bottom: 1px solid grey; padding-bottom: 5px;"><strong>Info. Unidades de contrucción</strong></h6>
+    return `<h6 class="text-center" style="border-bottom: 1px solid grey; padding-bottom: 5px;"><strong>Info. Unidades de contrucción</strong></h6>
             <strong>Identificador:</strong> ${feature.properties.id_operacion}<br>
             <strong>Área construida:</strong> ${feature.properties.area_const} m² <br>
             <strong>Planta de ubicación:</strong> ${feature.properties.planta_ubi} <br>
             <strong>Altura:</strong> ${feature.properties.altura} <br>
             <strong>Número predial:</strong> ${feature.properties.name} <br>`;
   } else if (nombreCapa === 'Barrios') {
-    return `<h6 style="border-bottom: 1px solid grey; padding-bottom: 5px;"><strong>Info. Barrios</strong></h6>
-            <strong>Identificador:</strong> ${feature.properties.objectid}<br>
+    return `<h6 class="text-center" style="border-bottom: 1px solid grey; padding-bottom: 5px;"><strong>Info. Barrios</strong></h6>
+            <strong class="fs-8" >Identificador:</strong> ${feature.properties.objectid}<br>
             <strong>Codigo:</strong> ${feature.properties.codigo}<br>        
             <strong>Código Sector:</strong> ${feature.properties.codigo_sector}`;
   } else if (nombreCapa === 'Construccion') {
-    return `<h6 style="border-bottom: 1px solid grey; padding-bottom: 5px;"><strong>Info. Construcción</strong></h6>
+    return `<h6 class="text-center" style="border-bottom: 1px solid grey; padding-bottom: 5px;"><strong>Info. Construcción</strong></h6>
             <strong>Identificador :</strong> ${feature.properties.PREDIOS_id_operaci}<br>
             <strong>Numero Predial:</strong> ${feature.properties.name} <br>
             <strong>Área de construcción:</strong> ${feature.properties.area_const} m² <br>
             <strong>Tipo de construcción:</strong> ${feature.properties.tipo_const} <br>
             <strong>Altura:</strong> ${feature.properties.altura} <br>`;
   } else if (nombreCapa === 'Manzanas') {
-    return `<h6 style="border-bottom: 1px solid grey; padding-bottom: 5px;"><strong>Info. Manzanas</strong></h6>
+    return `<h6 class="text-center" style="border-bottom: 1px solid grey; padding-bottom: 5px;"><strong>Info. Manzanas</strong></h6>
             <strong>Codigo:</strong> ${feature.properties.codigo}<br>
             <strong>Código del barrio:</strong> ${feature.properties.codigo_barrio}<br>
             `;
   } else if (nombreCapa === 'Comunas') {
-    return `<h6 style="border-bottom: 1px solid grey; padding-bottom: 5px;"><strong>Info. Comunas</strong></h6>
+    return `<h6 class="text-center" style="border-bottom: 1px solid grey; padding-bottom: 5px;"><strong>Info. Comunas</strong></h6>
             <strong>Nombre :</strong> ${feature.properties.NOMBRE_COM}<br>
             <strong>Nombre UPZ :</strong> ${feature.properties.NOMBRE_UPZ}<br>
             <strong>Comuna Número:</strong> ${feature.properties.COMUNA} <br>
             <strong>Área:</strong> ${feature.properties.AREA__HAS_} Has <br>
             <strong>N° Personas:</strong> ${feature.properties.No_Persona} <br>`;
   } else if (nombreCapa === 'ZonaHomogeneaFisicaUrbana') {
-    return `<h6 style="border-bottom: 1px solid grey; padding-bottom: 5px;"><strong>Info. Zona Homogenea Fisica Urbana</strong></h6>
+    return `<h6 class="text-center" style="border-bottom: 1px solid grey; padding-bottom: 5px;"><strong>Info. Zona Homogenea Fisica Urbana</strong></h6>
             <strong>Codigo:</strong> ${feature.properties.codigo}<br>
             <strong>Servicios Públicos:</strong> ${feature.properties.servicio_p}<br>
             <strong>Uso actual del suelo:</strong> ${feature.properties.uso_actual}<br>
@@ -270,20 +502,20 @@ function generarPopup(feature, nombreCapa) {
             <strong>Influencia:</strong> ${feature.properties.influencia}<br>
             `;
   } else if (nombreCapa === 'ZonaHomogeneaGeoeconomicaUrbana') {
-    return `<h6 style="border-bottom: 1px solid grey; padding-bottom: 5px;"><strong>Info. Zona Homogenea Geoeconómica Urbana</strong></h6>
+    return `<h6 class="text-center" style="border-bottom: 1px solid grey; padding-bottom: 5px;"><strong>Info. Zona Homogenea Geoeconómica Urbana</strong></h6>
             <strong>Codigo:</strong> ${feature.properties.codigo}<br>
             <strong>Valor metro:</strong> ${feature.properties.valor_metr}<br>
             <strong>Codigo zona geoeconómica:</strong> ${feature.properties.codigo_zon}<br>
             `;
   } else if (["Comuna_1", "Comuna_2", "Comuna_3", "Comuna_4", "Comuna_5", "Comuna_6", "Comuna_7", "Comuna_8", "Comuna_9", "Comuna_10"].includes(nombreCapa)) {
-    return `<h6 style="border-bottom: 1px solid grey; padding-bottom: 5px;"><strong>Info. Comunas</strong></h6>
+    return `<h6 class="text-center" style="border-bottom: 1px solid grey; padding-bottom: 5px;"><strong>Info. Comunas</strong></h6>
             <strong>Nombre :</strong> ${feature.properties.NOMBRE_COM}<br>
             <strong>Nombre UPZ :</strong> ${feature.properties.NOMBRE_UPZ}<br>
             <strong>Comuna Número:</strong> ${feature.properties.COMUNA} <br>
             <strong>Área:</strong> ${feature.properties.AREA__HAS_} Has <br>
             <strong>N° Personas:</strong> ${feature.properties.No_Persona} <br>`;
   } else if (nombreCapa === 'TerrenoRural') {
-    return `<h6 style="border-bottom: 1px solid grey; padding-bottom: 5px;"><strong>Info. Terreno</strong></h6>
+    return `<h6 class="text-center" style="border-bottom: 1px solid grey; padding-bottom: 5px;"><strong>Info. Terreno</strong></h6>
             <strong>Identificador:</strong> ${feature.properties.PREDIOS_id_operaci}<br>
             <strong>Área de terreno:</strong> ${feature.properties.area_terre} m² <br>
             <strong>Número predial:</strong> ${feature.properties.name} <br>
@@ -293,7 +525,7 @@ function generarPopup(feature, nombreCapa) {
             <strong>Dirección:</strong> ${feature.properties.Direccion} <br>
             <strong>Condición del predio:</strong> ${feature.properties.PREDIOS_condicion_}`;
   } else if (nombreCapa === 'ConstruccionRural') {
-    return `<h6 style="border-bottom: 1px solid grey; padding-bottom: 5px;"><strong>Info. Construcción</strong></h6>
+    return `<h6 class="text-center" style="border-bottom: 1px solid grey; padding-bottom: 5px;"><strong>Info. Construcción</strong></h6>
             <strong>Identificador :</strong> ${feature.properties.PREDIOS_id_operaci}<br>
             <strong>Numero Predial:</strong> ${feature.properties.name} <br>
             <strong>Área de construcción:</strong> ${feature.properties.area_const} m² <br>
@@ -301,7 +533,7 @@ function generarPopup(feature, nombreCapa) {
             <strong>Número de pisos:</strong> ${feature.properties.numero_pis} <br>
             <strong>Tipo de dominio:</strong> ${feature.properties.tipo_domin} <br>`;
   } else if (nombreCapa === 'ZonaHomogeneaFisicaRural') {
-    return `<h6 style="border-bottom: 1px solid grey; padding-bottom: 5px;"><strong>Info. Zona Homogenea Fisica Rural</strong></h6>
+    return `<h6 class="text-center" style="border-bottom: 1px solid grey; padding-bottom: 5px;"><strong>Info. Zona Homogenea Fisica Rural</strong></h6>
             <strong>Codigo:</strong> ${feature.properties.codigo}<br>
             <strong>Disponibilidad de agua:</strong> ${feature.properties.disponibil}<br>
             <strong>Uso actual del suelo:</strong> ${feature.properties.uso_actual}<br>
@@ -309,19 +541,19 @@ function generarPopup(feature, nombreCapa) {
             <strong>Norma de uso de suelo:</strong> ${feature.properties.norma_uso_}<br>
             `;
   } else if (nombreCapa === 'ZonaHomogeneaGeoeconomicaRural') {
-    return `<h6 style="border-bottom: 1px solid grey; padding-bottom: 5px;"><strong>Info. Zona Homogenea Geoeconómica Rural</strong></h6>
+    return `<h6 class="text-center" style="border-bottom: 1px solid grey; padding-bottom: 5px;"><strong>Info. Zona Homogenea Geoeconómica Rural</strong></h6>
             <strong>Codigo:</strong> ${feature.properties.codigo}<br>
             <strong>Valor Hectárea:</strong> ${feature.properties.valor_hect}<br>
             <strong>Codigo zona geoeconómica:</strong> ${feature.properties.codigo_zon}<br>
             `;
   } else if (nombreCapa === 'Vereda') {
-    return `<h6 style="border-bottom: 1px solid grey; padding-bottom: 5px;"><strong>Info. Veredas </strong></h6>
+    return `<h6 class="text-center" style="border-bottom: 1px solid grey; padding-bottom: 5px;"><strong>Info. Veredas </strong></h6>
             <strong>Codigo:</strong> ${feature.properties.codigo}<br>
             <strong>Nombre:</strong> ${feature.properties.nombre}<br>
             <strong>Codigo Sector:</strong> ${feature.properties.codigo_sector}<br>
             `;
   } else if (nombreCapa === 'UnidadesRural') {
-    return `<h6 style="border-bottom: 1px solid grey; padding-bottom: 5px;"><strong>Info. Unidades de contrucción</strong></h6>
+    return `<h6 class="text-center" style="border-bottom: 1px solid grey; padding-bottom: 5px;"><strong>Info. Unidades de contrucción</strong></h6>
             <strong>Identificador:</strong> ${feature.properties.id_operacion}<br>
             <strong>Área construida:</strong> ${feature.properties.area_const} m² <br>
             <strong>Planta ubicación:</strong> ${feature.properties.planta_ubi} <br>
@@ -336,6 +568,71 @@ function generarPopup(feature, nombreCapa) {
 
   }
 }
+
+function generarBloqueRelaciones(nombreCapa, feature) {
+  const config = relacionesPorCapa[nombreCapa];
+  if (!config) return '';
+  const valorClave = feature?.properties?.[config.clave];
+  let html = `<div class="panel-info-relaciones"><h6 class="relaciones-titulo">${config.titulo || 'Relaciones'}</h6>`;
+  if (valorClave === undefined || valorClave === null || String(valorClave).trim() === '') {
+    html += `<p class="relacion-sin-dato">Sin identificador para cruzar informacion.</p></div>`;
+    return html;
+  }
+  const valorVisible = String(valorClave).trim();
+  html += `<p class="relacion-id">ID operacion: <strong>${valorVisible}</strong></p>`;
+  config.relacionadas.forEach((rel) => {
+    const coincidencias = obtenerRelacionesPorValor(rel.capa, valorClave);
+    html += `<div class="relacion-seccion"><div class="relacion-encabezado"><span>${rel.etiqueta || rel.capa}</span><span class="relacion-badge">${coincidencias.length}</span></div>`;
+    if (!coincidencias.length) {
+      html += `<p class="relacion-vacia">Sin coincidencias.</p>`;
+    } else {
+      html += `<ul class="relacion-lista">`;
+      const limite = rel.maxResultados && rel.maxResultados > 0 ? rel.maxResultados : coincidencias.length;
+      coincidencias.slice(0, limite).forEach((item) => {
+        const resumen = (rel.camposResumen || []).map((campo) => {
+          const valorCampo = item?.properties?.[campo.propiedad];
+          return `<span><strong>${campo.etiqueta}:</strong> ${valorCampo ?? 'Sin dato'}</span>`;
+        }).join('<br>');
+        html += `<li class="relacion-item">${resumen || 'Informacion no disponible'}</li>`;
+      });
+      if (coincidencias.length > limite) {
+        html += `<li class="relacion-item relacion-item-extra">+ ${coincidencias.length - limite} registros adicionales</li>`;
+      }
+      html += `</ul>`;
+    }
+    html += `</div>`;
+  });
+  html += `</div>`;
+  return html;
+}
+
+const panelInfo = document.getElementById('panel-info');
+const panelInfoContent = panelInfo?.querySelector('.panel-info-content');
+const panelInfoClose = document.getElementById('panel-info-close');
+
+function mostrarInfoPanel(feature, nombreCapa) {
+  if (!panelInfoContent) return;
+  let contenido = generarPopup(feature, nombreCapa);
+  const relaciones = generarBloqueRelaciones(nombreCapa, feature);
+  if (relaciones) {
+    contenido += relaciones;
+  }
+  panelInfoContent.innerHTML = contenido;
+  panelInfo.classList.add('visible');
+}
+
+function ocultarInfoPanel() {
+  panelInfo.classList.remove('visible');
+  panelInfoContent.innerHTML = '';
+}
+
+panelInfoClose?.addEventListener('click', ocultarInfoPanel);
+map.on('click', (evt) => {
+  // evita cerrar cuando el clic viene de una capa GeoJSON
+  if (!evt.originalEvent || !evt.originalEvent._fromFeatureClick) {
+    ocultarInfoPanel();
+  }
+});
 
 // ==========================
 // TOGGLE DE CAPAS
@@ -390,45 +687,60 @@ function toggleCapa(nombre) {
             const color = colores[feature.properties.objectid % colores.length];
             return { color: 'Black', fillColor: color, weight: 0.8, fillOpacity: 0.5, dashArray: '2' };
           } else {
+            // Usa color del estilo general definido en config
+            if (config.estilo && config.estilo.leyenda) {
+              agregarALeyenda(nombre, config.estilo.leyenda);
+            } else {
+              agregarALeyenda(nombre, '#888'); // color por defecto
+            }
             return config.estilo;
           }
         },
 
         onEachFeature: (feature, layer) => {
 
-          if (!modoSeleccionActivo) {
-            layer.bindPopup(generarPopup(feature, nombre));
-          }
+          // if (!modoSeleccionActivo) {
+          //   layer.bindPopup(generarPopup(feature, nombre));
+          // }
 
-          //--------- Sección para seleccionar un elemento al hacer clic  -------------------------
+          layer.on('click', (evt) => {
+            evt.originalEvent._fromFeatureClick = true; // evita que el map.on('click') cierre el panel
+            if (!modoSeleccionActivo) {
+              mostrarInfoPanel(feature, nombre);        // muestra la ficha en el panel lateral
+            } else {
+              //--------- Sección para seleccionar un elemento al hacer clic  -------------------------
 
-          layer.on('click', function (e) {
-            if (modoSeleccionActivo) {
-              // --- Selección ---
-              if (layerSeleccionado && estiloOriginalSeleccionado) {
-                layerSeleccionado.setStyle(estiloOriginalSeleccionado);
-              }
+              layer.on('click', function (e) {
+                if (modoSeleccionActivo) {
+                  // --- Selección ---
+                  if (layerSeleccionado && estiloOriginalSeleccionado) {
+                    layerSeleccionado.setStyle(estiloOriginalSeleccionado);
+                  }
 
-              //forzar el mouseout cuando se cambia de selección
-              if (layerSeleccionado && layerSeleccionado !== this) {
-                layerSeleccionado.fire('mouseout');
-              }
+                  //forzar el mouseout cuando se cambia de selección
+                  if (layerSeleccionado && layerSeleccionado !== this) {
+                    layerSeleccionado.fire('mouseout');
+                  }
 
-              Seleccion = feature;
-              //mostrarAlertaFiltro(`Has seleccionado: ${feature.properties.nombre || feature.properties.etiqueta || feature.properties.npn || feature.properties.fid || 'Elemento sin nombre'}`);
-              //console.log(Seleccion);
-              estiloOriginalSeleccionado = Object.assign({}, this.options);
-              layerSeleccionado = this;
-              this.setStyle({ color: 'yellow', weight: 2, fillOpacity: 0.6 });
+                  Seleccion = feature;
+                  //mostrarAlertaFiltro(`Has seleccionado: ${feature.properties.nombre || feature.properties.etiqueta || feature.properties.npn || feature.properties.fid || 'Elemento sin nombre'}`);
+                  //console.log(Seleccion);
+                  estiloOriginalSeleccionado = Object.assign({}, this.options);
+                  layerSeleccionado = this;
+                  this.setStyle({ color: 'yellow', weight: 2, fillOpacity: 0.6 });
 
-              if (window.capaSeleccion) {
-                map.removeLayer(window.capaSeleccion);
-              }
-              window.capaSeleccion = L.geoJSON({ type: 'FeatureCollection', features: [Seleccion] }, {
-                style: { fillColor: 'yellow', color: 'black', weight: 1, fillOpacity: 0.6 }
-              }).addTo(map);
+                  if (window.capaSeleccion) {
+                    map.removeLayer(window.capaSeleccion);
+                  }
+                  window.capaSeleccion = L.geoJSON({ type: 'FeatureCollection', features: [Seleccion] }, {
+                    style: { fillColor: 'yellow', color: 'black', weight: 1, fillOpacity: 0.6 }
+                  }).addTo(map);
+                }
+              });
             }
           });
+
+
 
           //--------- Sección para resaltar un elemento cuando se pasa el mouse por encima-------------------------
 
@@ -460,6 +772,7 @@ function toggleCapa(nombre) {
     if (capasVisibles[nombre]) {
       map.removeLayer(capasVisibles[nombre]);
       capasVisibles[nombre] = null;
+      quitarDeLeyenda(nombre);
     }
   }
 }
@@ -919,3 +1232,106 @@ fetch('https://pub-5aa38eced5964a798d34f7f21717fc5f.r2.dev/data/zonas.json')
       select.appendChild(opt);
     });
   });
+
+
+// función para minimizar y maximizar el panel de información
+
+const btn = document.getElementById('boton_minimizar');
+const panel = document.getElementById('panel_filtros');
+const icono = btn.querySelector('i');
+
+btn.addEventListener('click', () => {
+  const minimizando = !panel.classList.contains('minimizado');
+
+  // 1) Inicia SOLO la transición del panel
+  panel.classList.toggle('minimizado');
+
+  // 2) Cambia el ícono
+  icono.classList.toggle('bi-arrow-left-circle', !minimizando);
+  icono.classList.toggle('bi-arrow-right-circle', minimizando);
+});
+
+// ----------------------------------------------------------------
+//  función para generar las leyendas dinámicamente en el panel de filtros
+// ----------------------------------------------------------------
+function agregarALeyenda(nombreCapa, color) {
+  const contenedor = document.getElementById("leyenda-contenido");
+  const leyenda = document.getElementById("leyenda");
+  const mapa2 = document.getElementById("Seccionmapita");
+
+  // Evita duplicados
+  if (document.querySelector(`[data-capa="${nombreCapa}"]`)) return;
+
+  // diccionario para los nombres de las capas que se van a mostrar en la leyenda 
+
+  const nombresCapas = {
+    Barrios: "Barrios Urbanos",
+    Comunas: "Comunas",
+    Terreno: "Terreno Urbano",
+    TerrenoRural: "Terreno Rural",
+    Construccion: "Construcción Urbana",
+    ConstruccionRural: "Construcción Rural",
+    ZonaHomogeneaFisicaUrbana: "ZHF (Urbana)",
+    ZonaHomogeneaFisicaRural: "ZHF (Rural)",
+    ZonaHomogeneaGeoeconomicaUrbana: "ZHG (Urbana)",
+    ZonaHomogeneaGeoeconomicaRural: "ZHG (Rural)",
+    Unidades: "Unidades Urbanas",
+    UnidadesRural: "Unidades Rurales"
+  }
+
+  // Crear el elemento
+  const item = document.createElement("div");
+  item.className = "leyenda-item";
+  item.dataset.capa = nombreCapa;
+
+  // Obtiene el nombre visible (si existe) o usa el nombre original
+  const nombreVisible = nombresCapas[nombreCapa] || nombreCapa;
+
+  item.innerHTML = `
+    <div class="leyenda-color" style="background-color:${color};"></div>
+    <span>${nombreVisible}</span>
+  `;
+
+  contenedor.appendChild(item);
+  leyenda.style.display = "block"; // mostrar leyenda si estaba ocult
+  leyenda.classList.add("mostrar-leyenda");
+
+  // Ocultar el mini mapa solo en pantallas de laptop o más pequeñas
+  if (window.matchMedia("(max-width: 1930px) and (max-height: 768px)").matches) {
+    mapa2.classList.add("ocultar-mapa2");
+
+  }
+}
+
+// ----------------------------------------------------------------
+//  función para eliminar la leyenda cuando se desactiva la capa
+// ----------------------------------------------------------------
+
+function quitarDeLeyenda(nombreCapa) {
+  const item = document.querySelector(`[data-capa="${nombreCapa}"]`);
+  const contenedor = document.getElementById("leyenda-contenido");
+  const leyenda = document.getElementById("leyenda");
+  const mapa2 = document.getElementById("Seccionmapita");
+
+  if (item) {
+    item.remove();
+  }
+
+  // Si no quedan elementos, ocultar la leyenda y mostrar el mapa con animación
+  if (contenedor.children.length === 0) {
+    leyenda.style.display = "none";
+
+    // 👇 Mostrar de nuevo la sección del mapita
+    mapa2.classList.remove("ocultar-mapa2");
+
+    // 👇 Activa la animación
+    mapa2.classList.add("animacion-aparecer");
+
+    // 🔁 Cuando termine la animación, elimina la clase (para que pueda repetirse)
+    mapa2.addEventListener("animationend", function limpiar() {
+      mapa2.classList.remove("animacion-aparecer");
+      mapa2.removeEventListener("animationend", limpiar);
+    });
+  }
+}
+

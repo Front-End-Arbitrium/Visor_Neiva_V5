@@ -1,6 +1,8 @@
-html, body {
+html,
+body {
   font-family: 'Poppins', sans-serif !important;
 }
+
 body {
   margin: 0;
   background: #e93a3a;
@@ -8,6 +10,7 @@ body {
   touch-action: pan-x pan-y;
   -ms-touch-action: pan-x pan-y;
 }
+
 #map {
   width: 100%;
   border: 1px solid #002F55;
@@ -15,6 +18,7 @@ body {
   touch-action: none;
   -ms-touch-action: none;
 }
+
 #panel-controles {
   position: absolute;
   font-family: 'Poppins', sans-serif;
@@ -26,18 +30,21 @@ body {
   gap: 12px;
   z-index: 1000;
 }
-#loader-terreno{
+
+#loader-terreno {
   font-family: 'Poppins', sans-serif;
 
 }
-.img-arbi{
- width: 2.7em;
- 
+
+.img-arbi {
+  width: 2.7em;
+
 }
+
 .panel {
   background: #ffffffee;
   padding: 12px;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.25);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.25);
   border-radius: 10px;
   backdrop-filter: blur(4px);
   font-size: 14px;
@@ -46,11 +53,13 @@ body {
   gap: 6px;
   min-width: 200px;
 }
+
 .panel label {
   font-weight: bold;
   margin-bottom: 2px;
   color: #333;
 }
+
 .panel-title {
   display: flex;
   align-items: center;
@@ -59,11 +68,15 @@ body {
   color: #0078d4;
   margin-bottom: 6px;
 }
+
 .panel-title i {
   margin-right: 6px;
   color: #0078d4;
 }
-select, input[type="text"], button {
+
+select,
+input[type="text"],
+button {
   padding: 6px;
   border: 1px solid #ccc;
   border-radius: 6px;
@@ -71,9 +84,12 @@ select, input[type="text"], button {
   outline: none;
   transition: border-color 0.2s ease-in-out;
 }
-select:focus, input[type="text"]:focus {
+
+select:focus,
+input[type="text"]:focus {
   border-color: #0078d4;
 }
+
 button {
   cursor: pointer;
   background-color: #0078d4;
@@ -82,9 +98,11 @@ button {
   font-weight: bold;
   transition: background-color 0.2s;
 }
+
 button:hover {
   background-color: #005fa3;
 }
+
 datalist option {
   text-transform: capitalize;
 }
@@ -109,7 +127,7 @@ datalist option {
 
 .capa-vista.activa img {
   border: 2px solid #002F55 !important;
-  box-shadow: 0 2px 8px rgba(0,47,85,0.3);
+  box-shadow: 0 2px 8px rgba(0, 47, 85, 0.3);
 }
 
 .capa-vista.activa small {
@@ -153,17 +171,393 @@ datalist option {
 }
 
 .leaflet-control-attribution {
-  font-size: 0.6em !important; /* o el tamaño que prefieras */
+  font-size: 0.6em !important;
+  /* o el tamaño que prefieras */
   padding: 2px 4px !important;
 }
 
 #btn-seleccionar.active {
   background-color: #fffb00 !important;
 }
+
 #btn-seleccionar.active i {
   color: #002F55 !important;
 }
 
+.leaflet-draw-toolbar a {
+  background: none !important;
+  background-color: #002F55 !important;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.25);
+  color: #fefefe !important;
+}
+
+.leaflet-draw-toolbar a:hover {
+  background-color: #549fd8 !important;
+}
+
+.leaflet-draw-draw-polygon {
+  content: "";
+}
 
 
+.leaflet-draw-draw-polyline::before {
+  content: "\f547";
+  font-family: "Font Awesome 5 Free";
+  font-weight: 900;
+}
 
+.leaflet-draw-draw-polygon::before {
+  content: "\f5ee";
+  font-family: "Font Awesome 5 Free";
+  font-weight: 900;
+}
+
+.leaflet-draw-edit-remove::before {
+  content: "\f1f8";
+  font-family: "Font Awesome 5 Free";
+  font-weight: 900;
+}
+
+
+.leaflet-draw-toolbar a.leaflet-draw-toolbar-button-enabled {
+  background-color: #549fd8 !important;
+}
+
+.leaflet-draw-actions {
+  background-color: #002F55 !important;
+  margin-top: 2px !important;
+  margin-right: 5px !important;
+  border-radius: 8px !important;
+  padding: 6px 12px;
+}
+
+.leaflet-draw-actions a {
+  background-color: #002F55 !important;
+  color: #fefefe;
+  font-weight: 600;
+  font-family: 'Poppins', sans-serif !important;
+}
+
+.leaflet-draw-actions a:hover {
+  color: #002F55;
+  background-color: #fefefe !important;
+  font-weight: 800;
+}
+
+.leaflet-draw-edit-remove {
+  background-image: none;
+  background-color: #ff4d4f;
+  color: #fff;
+}
+
+.leaflet-draw-edit-remove:hover {
+  background-color: #d9363e;
+}
+
+.leaflet-draw-tooltip {
+  background: rgba(0, 47, 85, 0.9);
+  color: #fefefe;
+  border-radius: 6px;
+  padding: 6px 10px;
+  font-size: 0.8rem;
+}
+
+.leaflet-marker-icon {
+  border-radius: 50%;
+  /* border: 1px solid #002F55 !important; */
+}
+
+.panel-info {
+  display: none;
+  font-size: small;
+  position: absolute;
+  top: 1%;
+  left: 10px;
+  width: 25%;
+  max-height: 60vh;
+  overflow-y: auto;
+  background: #ffffffee;
+  padding: 10px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.25);
+  border-radius: 10px;
+  backdrop-filter: blur(4px);
+  z-index: 1001;
+  background-repeat: no-repeat;
+  background-size: 4.2rem;
+  background-position: 100% 100%;
+  background-image: url(assets/img/logobnb.png);
+  scrollbar-width: thin;
+  scrollbar-color: #002F55 #01325a00;
+}
+
+#panel-info-close {
+  background-color: #002f55e7 !important;
+  border-radius: 3px;
+  font-size: smaller;
+  padding: 4px;
+}
+
+.panel-info.visible {
+  display: block;
+
+}
+
+.panel-info-content {
+  overflow-y: auto;
+  padding: 5px;
+  padding-top: 0px;
+}
+
+
+.panel-info-relaciones {
+  margin-top: 0.75rem;
+  border-top: 1px solid rgba(0, 47, 85, 0.15);
+  padding-top: 0.7rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+}
+
+.relaciones-titulo {
+  font-size: 0.85rem;
+  font-weight: 800;
+  color: #002F55;
+  margin-bottom: 0.35rem;
+  text-align: center;
+}
+
+.relacion-id {
+  font-size: 0.75rem;
+  color: #1f2a36;
+  margin-bottom: 0.4rem;
+}
+
+.relacion-seccion {
+  border: 1px solid rgba(0, 47, 85, 0.12);
+  border-radius: 8px;
+  padding: 0.55rem 0.65rem;
+  background: #e3ecf5;
+}
+
+.relacion-encabezado {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 0.8rem;
+  font-weight: 900;
+  color: #002F55;
+  margin-bottom: 0.35rem;
+}
+
+.relacion-badge {
+  background: #002F55;
+  color: #ffffff;
+  border-radius: 5px;
+  padding: 0.05rem 0.45rem;
+  font-size: 0.7rem;
+  line-height: 1.3;
+}
+
+.relacion-lista {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.45rem;
+}
+
+.relacion-item {
+  font-size: 0.75rem;
+  line-height: 1.25;
+  background: #ffffff;
+  border-radius: 6px;
+  padding: 0.45rem;
+  border: 1px solid rgba(0, 47, 85, 0.1);
+}
+
+.relacion-vacia,
+.relacion-sin-dato {
+  font-size: 0.75rem;
+  color: #5c6c7c;
+  margin: 0;
+}
+
+.relacion-item-extra {
+  font-style: italic;
+  background: #eef3f8;
+  color: #5c6c7c;
+}
+
+#panel_filtros {
+  transition: all 0.3s ease;
+  width: 15% !important;
+}
+
+#panel_filtros.minimizado {
+  min-width: 3% !important;
+  max-width: 3% !important;
+  width: 3% !important;
+  padding: 0.1rem !important;
+}
+
+/* Ocultar todo el contenido excepto el botón cuando está minimizado */
+#panel_filtros.minimizado>div>*:not(#boton_minimizar) {
+  display: none !important;
+}
+
+#panel_filtros.minimizado>div {
+  padding: 0.5rem !important;
+  justify-content: flex-start !important;
+  align-items: center !important;
+}
+
+/* Asegurar que el botón siempre sea visible */
+#boton_minimizar {
+  display: block !important;
+  font-size: 1.5rem;
+}
+
+.btn_minimizar:hover {
+  color: #5ab1f8 !important;
+  transition: all 0.2 s ease-in-out;
+}
+
+#panel_filtros.minimizado #boton_minimizar {
+  margin: 0 auto !important;
+}
+
+.mapa-expandido {
+  transition: all 0.4s ease;
+  background-color: #13cc76;
+  flex: 1 1 96% !important;
+}
+
+#col-mapa {
+  transition: all 0.4s ease;
+  flex: 1 1 auto !important;
+  max-width: none !important;
+  min-width: 0;
+}
+
+/* estilos para leyenda dinámica en el panel izquierdo */
+
+
+@keyframes expandir {
+  0% {
+    transform: scale(0.9);
+    opacity: 0;
+  }
+
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+@keyframes aparecerDesdeAbajo {
+  0% {
+    transform: translateY(25px);
+    opacity: 0;
+  }
+
+  80% {
+    transform: translateY(-3px);
+    opacity: 1;
+  }
+
+  100% {
+    transform: translateY(0);
+  }
+}
+
+/* Clase que activa la animación de aparecer desde abajo */
+.animacion-aparecer {
+  animation: aparecerDesdeAbajo 0.5s ease forwards;
+}
+
+#leyenda {
+  font-family: 'Poppins', sans-serif;
+  min-height: 1%;
+  overflow-y: scroll;
+  display: none;
+}
+
+/* Scroll estilizado para el panel de leyenda */
+#leyenda {
+  scrollbar-width: thin;
+  scrollbar-color: #002F55 #01325a00;
+}
+
+.mostrar-leyenda {
+  animation: expandir 0.4s ease;
+}
+
+.leyenda-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.7rem;
+  padding: 2px 0;
+
+}
+
+.leyenda-color {
+  width: 25px;
+  height: 13px;
+  border-radius: 3px;
+  border: 1px solid #333;
+  flex-shrink: 0;
+}
+
+#mapa2 {
+  animation: expandir 0.4s ease;
+}
+
+@media (max-width: 1930px) and (max-height: 768px) {
+  .ocultar-mapa2 {
+    display: none !important;
+    visibility: hidden !important;
+    opacity: 0 !important;
+    height: 0 !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    overflow: hidden !important;
+    animation: expandir 0.4s ease;
+  }
+}
+
+/* Eliminar bordes generales del accordion */
+.accordion {
+  border: none !important;
+  background: transparent !important;
+}
+
+/* Quitar el borde entre los items */
+.accordion-item {
+  border: none !important;
+  background: transparent !important;
+  box-shadow: none !important;
+}
+
+/* Quitar líneas divisorias entre los botones */
+.accordion-button {
+  border: none !important;
+  box-shadow: none !important;
+}
+
+/* Quitar borde del contenido desplegado */
+.accordion-body {
+  border: none !important;
+  background: transparent !important;
+}
+
+.accordion-button:hover {
+  color: white!important;
+  background-color: #002F55 !important;
+}
+
+/* Cambiar color al hacer hover */
+.accordion-button:hover::after {
+  filter: invert(1) ;
+}
