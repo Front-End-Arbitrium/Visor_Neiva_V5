@@ -440,18 +440,11 @@
             <div id="map" style=" height: 100%; border-radius: 14px;"></div>
             <!-- panel de información que reemplaza al popup tradicional de leaflet -->
             <aside id="panel-info" class="panel-info">
-              <button id="panel-info-close">
-                <i class="bi bi-x-lg m-0 p-0 " style="color: #ffffff;"></i>
+              <button id="panel-info-close" type="button" class="p-1 rounded-1">
+                <i class="bi bi-x p-0" style="color: #ffffff;"></i>
               </button>
               <div class="panel-info-content"></div>
             </aside>
-            <!-- panel para mostrar elementos con relación cuando se da click en un terreno -->
-            <!-- <aside id="panel-info-dos" class="panel-info-dos">
-              <button id="panel-info-close">
-                <i class="bi bi-x-lg m-0 p-0 " style="color: #ffffff;"></i>
-              </button>
-              <div class="panel-info-content-dos"></div>
-            </aside> -->
           </div>
         </div>
       </div>
@@ -508,9 +501,18 @@
     <script src="https://unpkg.com/leaflet-snap/leaflet.snap.js"></script>
     <script src="https://unpkg.com/leaflet-snap/leaflet.drawsnapping.js"></script>
 
+    <!-- Script para exportar a PDF -->
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/3.0.3/jspdf.umd.min.js "></script> -->
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/pdfmake.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/vfs_fonts.js"></script>
+    <script  src="js/marca.js"></script>
+
+
+
 
     <!-- <script src="js/app2.js"></script> -->
-    <script src="js/app.js"></script>
+    <script  src="js/app.js"></script>
     <script src="js/app3.js"></script>
 </body>
 

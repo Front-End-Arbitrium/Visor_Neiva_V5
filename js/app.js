@@ -323,7 +323,7 @@ const relacionesPorCapa = {
       },
       {
         capa: 'Unidades',
-        etiqueta: 'Unidades urbanas',
+        etiqueta: 'Unidades de construcción urbanas',
         camposResumen: [
           { propiedad: 'name', etiqueta: 'Numero predial' },
           { propiedad: 'area_const', etiqueta: 'Area (m2)' },
@@ -349,7 +349,7 @@ const relacionesPorCapa = {
       },
       {
         capa: 'UnidadesRural',
-        etiqueta: 'Unidades rurales',
+        etiqueta: 'Unidades de construcción rurales',
         camposResumen: [
           { propiedad: 'name', etiqueta: 'Numero predial' },
           { propiedad: 'area_const', etiqueta: 'Area (m2)' },
@@ -430,7 +430,7 @@ for (const nombre in configVisor.capas) {
 
 Promise.all(cargarCapas).then(() => {
   prepararIndicesCapasRelacionales();
-  // Marcar el checkbox de Barrios 
+  // Marcar el checkbox de Barrios
   const checkboxBarrios = document.getElementById('capaBarrios');
   if (checkboxBarrios) checkboxBarrios.checked = true;
   // Mostrar la capa de Barrios
@@ -472,7 +472,7 @@ function generarPopup(feature, nombreCapa) {
   } else if (nombreCapa === 'Barrios') {
     return `<h6 class="text-center" style="border-bottom: 1px solid grey; padding-bottom: 5px;"><strong>Info. Barrios</strong></h6>
             <strong class="fs-8" >Identificador:</strong> ${feature.properties.objectid}<br>
-            <strong>Codigo:</strong> ${feature.properties.codigo}<br>        
+            <strong>Codigo:</strong> ${feature.properties.codigo}<br>
             <strong>Código Sector:</strong> ${feature.properties.codigo_sector}`;
   } else if (nombreCapa === 'Construccion') {
     return `<h6 class="text-center" style="border-bottom: 1px solid grey; padding-bottom: 5px;"><strong>Info. Construcción</strong></h6>
@@ -580,38 +580,60 @@ function generarBloqueRelaciones(nombreCapa, feature) {
   }
   const valorVisible = String(valorClave).trim();
   html += `<p class="relacion-id">ID operacion: <strong>${valorVisible}</strong></p>`;
-  config.relacionadas.forEach((rel) => {
+  config.relacionadas.forEach((rel, index) => {
     const coincidencias = obtenerRelacionesPorValor(rel.capa, valorClave);
-    html += `<div class="relacion-seccion"><div class="relacion-encabezado"><span>${rel.etiqueta || rel.capa}</span><span class="relacion-badge">${coincidencias.length}</span></div>`;
-    if (!coincidencias.length) {
+    const hayCoincidencias = coincidencias.length > 0;
+    const slugBase = `${nombreCapa}-${rel.capa}-${valorVisible}-${index}`;
+    const slug = slugBase.replace(/[^\w-]+/g, '_').toLowerCase() || `relacion-${Date.now()}-${index}`;
+    const targetId = `${slug}-contenido`;
+    html += `<div class="relacion-seccion">`;
+    if (!hayCoincidencias) {
+      html += `<div class="relacion-cabecera"><span>${rel.etiqueta || rel.capa}</span><span class="relacion-badge">0</span></div>`;
       html += `<p class="relacion-vacia">Sin coincidencias.</p>`;
     } else {
-      html += `<ul class="relacion-lista">`;
+      html += `<button class="relacion-toggle" type="button" data-rel-target="${targetId}" aria-expanded="false">
+        <span class="relacion-toggle-text">${rel.etiqueta || rel.capa}</span>
+        <span class="relacion-toggle-end">
+          <span class="relacion-badge">${coincidencias.length}</span>
+          <i class="bi bi-chevron-down relacion-icono" aria-hidden="true"></i>
+        </span>
+      </button>`;
+      html += `<div id="${targetId}" class="relacion-contenido" hidden><ul class="relacion-lista">`;
       const limite = rel.maxResultados && rel.maxResultados > 0 ? rel.maxResultados : coincidencias.length;
-      coincidencias.slice(0, limite).forEach((item) => {
+      coincidencias.slice(0).forEach((item) => {
         const resumen = (rel.camposResumen || []).map((campo) => {
           const valorCampo = item?.properties?.[campo.propiedad];
           return `<span><strong>${campo.etiqueta}:</strong> ${valorCampo ?? 'Sin dato'}</span>`;
         }).join('<br>');
         html += `<li class="relacion-item">${resumen || 'Informacion no disponible'}</li>`;
       });
-      if (coincidencias.length > limite) {
-        html += `<li class="relacion-item relacion-item-extra">+ ${coincidencias.length - limite} registros adicionales</li>`;
-      }
-      html += `</ul>`;
+      // if (coincidencias.length > limite) {
+      //   html += `<li class="relacion-item relacion-item-extra">+ ${coincidencias.length - limite} registros adicionales</li>`;
+      // }
+      html += `</ul></div>`;
     }
     html += `</div>`;
   });
-  html += `</div>`;
+  html += `</div>`
+
+  html += `<div class="relacion-exportar px-2">
+              
+              <button class="btn btn-sm  btn-gen-reporte" style="font-size: 0.6rem;" onclick="exportarPDF('${nombreCapa}', featureSeleccionadoActual)">
+                  <i class="bi bi-file-earmark-pdf"></i> Generar Reporte PDF
+              </button>
+              
+            </div>`;
   return html;
 }
 
 const panelInfo = document.getElementById('panel-info');
 const panelInfoContent = panelInfo?.querySelector('.panel-info-content');
 const panelInfoClose = document.getElementById('panel-info-close');
+let featureSeleccionadoActual = null;
 
 function mostrarInfoPanel(feature, nombreCapa) {
   if (!panelInfoContent) return;
+  featureSeleccionadoActual = feature;
   let contenido = generarPopup(feature, nombreCapa);
   const relaciones = generarBloqueRelaciones(nombreCapa, feature);
   if (relaciones) {
@@ -624,7 +646,28 @@ function mostrarInfoPanel(feature, nombreCapa) {
 function ocultarInfoPanel() {
   panelInfo.classList.remove('visible');
   panelInfoContent.innerHTML = '';
+  featureSeleccionadoActual = null;
 }
+
+document.addEventListener('click', (event) => {
+  const toggle = event.target.closest('.relacion-toggle');
+  if (!toggle) return;
+  const targetId = toggle.getAttribute('data-rel-target');
+  if (!targetId) return;
+  const contenido = document.getElementById(targetId);
+  if (!contenido) return;
+  const expandido = toggle.getAttribute('aria-expanded') === 'true';
+  if (expandido) {
+    contenido.hidden = true;
+    contenido.classList.remove('visible');
+  } else {
+    contenido.hidden = false;
+    contenido.classList.add('visible');
+  }
+  toggle.setAttribute('aria-expanded', String(!expandido));
+  const icono = toggle.querySelector('.relacion-icono');
+  if (icono) icono.classList.toggle('rotado', !expandido);
+});
 
 panelInfoClose?.addEventListener('click', ocultarInfoPanel);
 map.on('click', (evt) => {
@@ -679,7 +722,7 @@ function toggleCapa(nombre) {
 
         style: (feature) => {
           if (nombre === 'Barrios') {
-            // Asigna un color según el fid 
+            // Asigna un color según el fid
             const colores = ['#4F9DFF', '#67C587', '#F9C74F', '#F8965D',
               '#E36464', '#9B6BDB', '#4CCED9', '#A3B84F', '#F28FB2', '#bcbddc',
               '#756bb1', '#3B7D84', '#B48A78', '#7E9AA6', '#E31A1C'];
@@ -1262,7 +1305,7 @@ function agregarALeyenda(nombreCapa, color) {
   // Evita duplicados
   if (document.querySelector(`[data-capa="${nombreCapa}"]`)) return;
 
-  // diccionario para los nombres de las capas que se van a mostrar en la leyenda 
+  // diccionario para los nombres de las capas que se van a mostrar en la leyenda
 
   const nombresCapas = {
     Barrios: "Barrios Urbanos",
@@ -1334,4 +1377,230 @@ function quitarDeLeyenda(nombreCapa) {
     });
   }
 }
+
+
+
+
+function exportarPDF(nombreCapa, feature) {
+  if (!feature) {
+    alert("No hay información del elemento seleccionada.");
+    return;
+  }
+
+  // Extraer propiedades
+  const props = feature.properties || {};
+  // Extraer todos los datos de la información general que proviene de la capa
+  const datosGenerales = Object.entries(props).map(([k, v]) => ({
+    text: `${k}: ${v ?? 'Sin dato'}`,
+    fontSize: 10,
+    margin: [0, 2, 0, 0]
+  }));
+
+  // Generar HTML de relaciones y convertirlo a texto
+  const htmlRel = generarBloqueRelaciones(nombreCapa, feature);
+  const tempDiv = document.createElement('div');
+  tempDiv.innerHTML = htmlRel;
+  const textoRelaciones = tempDiv.innerText || tempDiv.textContent;
+
+  // console.log(`Propiedades de la feature: ${datosGenerales.map(item => item.text)}`);
+  // console.log(`Nombres de la feature: ${nombreFeature.map(item => item.text)}`);
+  // console.log(`Valores de la feature: ${valorFeature.map(item => item.text)}`);
+
+
+  // se crea una función que transforme los datos provenientes de la función generarBloqueRelaciones en un formato compatible con pdfMake.
+  function extraerDatosDesdePanel() {
+    const panel = document.querySelector('.panel-info-relaciones');
+    if (!panel) return [];
+
+    const body = [];
+
+    // === Encabezado general ===
+    const titulo = panel.querySelector('.relaciones-titulo')?.innerText || 'Sin título';
+    const idOperacion = panel.querySelector('.relacion-id strong')?.innerText || 'Sin ID';
+
+    body.push([
+      { text: titulo, colSpan: 2, style: 'tableHeader', alignment: 'center' }, {}
+    ]);
+    body.push([{ text: 'ID de operación', style:'tableSubHeader', bold: true, alignment: 'center' }, { text: idOperacion, style:'tableSubHeader', alignment: 'center' }]);
+
+    // === Secciones dinámicas ===
+    const secciones = panel.querySelectorAll('.relacion-seccion');
+
+    secciones.forEach(sec => {
+      // Nombre y número de elementos
+      const nombreSeccion = sec.querySelector('.relacion-toggle-text, .relacion-cabecera span')?.innerText || 'Sin nombre';
+      const cantidad = sec.querySelector('.relacion-badge')?.innerText || '0';
+
+      body.push([
+        { text: nombreSeccion, bold: true, alignment:'center', color: 'white',fillColor: '#002F55', fillOpacity: 0.7,margin: [0, 2, 0, 2]},
+        { text: cantidad, alignment: 'center', bold: true,color: 'white', fillColor: '#002F55', fillOpacity: 0.7, margin: [0, 2, 0, 2] }
+      ]);
+
+      // Si hay lista de elementos
+      const lista = sec.querySelectorAll('.relacion-item');
+      if (lista.length > 0) {
+        lista.forEach((li, index) => {
+          const spans = li.querySelectorAll('span');
+          const pares = Array.from(spans).map(sp => sp.innerText.trim());
+          const texto = pares.join('\n');
+
+          body.push([
+            { text: `Elemento ${index + 1}`, alignment: 'center', margin: [0, 10, 0, 10], fontSize: 9, bold: true },
+            { text: texto, fontSize: 9}
+          ]);
+        });
+      } else {
+        // Caso "sin coincidencias"
+        const mensaje = sec.querySelector('.relacion-vacia')?.innerText;
+        if (mensaje) {
+          body.push([
+            { text: mensaje, alignment: 'center', colSpan: 2, italics: true, color: 'gray' },
+            {}
+          ]);
+        }
+      }
+    });
+
+    return body;
+  }
+
+
+  const cuerpoTablaRelaciones = extraerDatosDesdePanel();
+
+  // --- Definición del documento ---
+  const docDefinition = {
+    background: function (currentPage, pageSize) {
+      return {
+        image: MarcaDeAgua,
+        width: pageSize.width * 0.6,
+        opacity: 0.12,
+        absolutePosition: { x: pageSize.width * 0.25, y: pageSize.height * 0.25 }
+      };
+    },
+    content: [
+      {
+        text: `Reporte de capa: ${nombreCapa} `,
+        style: 'header',
+      },
+      {
+        text: 'Seccion 1: Tabla de datos generales Terreno/Predio:',
+        style: 'subheader'
+      },
+      // {
+      //   ul: datosGenerales.map(item => item.text)
+      // },
+      {
+        table: {
+          widths: ['*', '*'],
+          body: [
+            [
+              { text: 'Información general del elemento seleccionado', style: 'tableHeader', colSpan: 2 },{}
+            ],
+            [
+              { text: 'Feature', style: 'tableSubHeader' },
+              { text: 'Valor', style: 'tableSubHeader' },
+
+            ],
+            ...Object.entries(props).map(([k, v]) => [
+              { text: k, style: 'tableCell', bold: true },
+              { text: v ?? 'Sin dato', style: 'tableCell' }
+            ])
+          ]
+        },
+        layout: {
+          fillColor: rowIndex => (rowIndex === 0 ? '#007bff' : rowIndex % 2 === 0 ? '#f9f9f9' : null),
+          hLineColor: () => '#cccccc',
+          vLineColor: () => '#cccccc'
+        },
+        style: 'tableStyle',
+      },
+      {
+        text: 'Sección 2: Elementos relacionados con este predio:',
+        style: 'subheader',
+        margin: [0, 10, 0, 10]
+      },
+
+      // se genera una tabla para organizar los datos provenientes de la función extraerDatosDesdePanel
+      {
+        table: {
+          headerRows: 1,
+          widths: ['45%', '55%'],
+          body: cuerpoTablaRelaciones
+        },
+        layout: {
+          fillColor: rowIndex => (rowIndex === 0 ? '#007bff' : rowIndex % 2 === 0 ? '#f9f9f9' : null),
+          hLineColor: () => '#cccccc',
+          vLineColor: () => '#cccccc'
+        },
+        style: 'tableStyle',
+      },
+      // {
+      //   text: htmlRel,
+      //   fontSize: 10,
+      //   margin: [0, 0, 0, 10]
+      // },
+      {
+        text: `Generado automaticamente desde el GeoVisor Catastral de Neiva. Propiedad intelectual de Arga: ${new Date().toLocaleString()}`,
+        style: 'footer'
+      }
+    ],
+
+    styles: {
+      header: {
+        fontSize: 20,
+        bold: true,
+        margin: [0, 0, 0, 10],
+        alignment: 'center',
+        color: '#002F55'
+      },
+      subheader: {
+        fontSize: 13,
+        bold: true,
+        color: '#002F55',
+        margin: [0, 0, 0, 4],
+        alignment: 'center'
+      },
+      footer: {
+        fontSize: 9,
+        italics: true,
+        color: 'gray',
+        alignment: 'right'
+      },
+      tableHeader: {
+        fontSize: 12,
+        bold: true,
+        fillColor: '#002F55',
+        color: 'white',
+        alignment: 'center'
+      },
+      tableSubHeader: {
+        fillColor: '#002F55',
+        fillOpacity: 0.2,
+        bold: true,
+        fontSize: 11,
+        alignment: 'center',
+        margin: [0, 3, 0, 3] 
+      },
+      tableStyle: {
+        margin: [45, 0, 45, 10],
+      },
+      tableCell: {
+        fontSize: 10,
+        margin: [0, 1, 0, 1],
+        alignment: 'center'
+      }
+    },
+    pageMargins: [30, 30, 30, 30],
+    defaultStyle: {
+      fontSize: 11,
+      lineHeight: 1.2
+    }
+  };
+
+  // Crear y descargar el PDF
+  // pdfMake.createPdf(docDefinition).download(`resumen_${nombreCapa}.pdf`);
+  pdfMake.createPdf(docDefinition).open();
+}
+// ==========================
+
 

@@ -273,8 +273,8 @@ datalist option {
   position: absolute;
   top: 1%;
   left: 10px;
-  width: 25%;
-  max-height: 60vh;
+  width: 23%;
+  max-height: 45vh;
   overflow-y: auto;
   background: #ffffffee;
   padding: 10px;
@@ -292,10 +292,13 @@ datalist option {
 
 #panel-info-close {
   background-color: #002f55e7 !important;
-  border-radius: 3px;
-  font-size: smaller;
-  padding: 4px;
 }
+
+#panel-info-close:hover {
+  background-color: #6ea1c5 !important;
+}
+
+
 
 .panel-info.visible {
   display: block;
@@ -304,7 +307,7 @@ datalist option {
 
 .panel-info-content {
   overflow-y: auto;
-  padding: 5px;
+  padding: 8px;
   padding-top: 0px;
 }
 
@@ -315,7 +318,7 @@ datalist option {
   padding-top: 0.7rem;
   display: flex;
   flex-direction: column;
-  gap: 0.2rem;
+  gap: 0.7rem;
 }
 
 .relaciones-titulo {
@@ -335,16 +338,16 @@ datalist option {
 .relacion-seccion {
   border: 1px solid rgba(0, 47, 85, 0.12);
   border-radius: 8px;
-  padding: 0.55rem 0.65rem;
-  background: #e3ecf5;
+  padding: 0.45rem 0.55rem;
+  background: #f5f8fb;
 }
 
-.relacion-encabezado {
+.relacion-cabecera {
   display: flex;
   align-items: center;
   justify-content: space-between;
   font-size: 0.8rem;
-  font-weight: 900;
+  font-weight: 600;
   color: #002F55;
   margin-bottom: 0.35rem;
 }
@@ -353,9 +356,70 @@ datalist option {
   background: #002F55;
   color: #ffffff;
   border-radius: 5px;
-  padding: 0.05rem 0.45rem;
+  padding: 3px 6px;
   font-size: 0.7rem;
   line-height: 1.3;
+}
+
+.relacion-toggle {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  background: none;
+  border: none;
+  padding: 0;
+  color: #002F55;
+  font-size: 0.8rem;
+  font-weight: 600;
+  font-family: inherit;
+  cursor: pointer;
+  gap: 0.5rem;
+}
+
+.relacion-toggle:focus {
+  outline: none;
+}
+
+.relacion-toggle:hover{
+  background-color: transparent !important;
+}
+
+
+
+.relacion-toggle:hover .relacion-toggle-text {
+  text-decoration: underline;
+}
+
+.relacion-toggle[aria-expanded="true"] .relacion-toggle-text {
+  color: #001a2e;
+}
+
+.relacion-toggle-end {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+}
+
+.relacion-icono {
+  font-size: 0.9rem;
+  transition: transform 0.2s ease;
+  color: inherit;
+}
+
+.relacion-icono.rotado {
+  transform: rotate(180deg);
+}
+
+.relacion-contenido {
+  margin-top: 0.5rem;
+  display: none;
+  flex-direction: column;
+  gap: 0.45rem;
+}
+
+.relacion-contenido.visible {
+  display: flex;
 }
 
 .relacion-lista {
@@ -372,8 +436,27 @@ datalist option {
   line-height: 1.25;
   background: #ffffff;
   border-radius: 6px;
-  padding: 0.45rem;
+  padding: 0.75rem;
   border: 1px solid rgba(0, 47, 85, 0.1);
+}
+
+.relacion-exportar{
+  display: flex;
+  justify-content: space-between;
+  text-align:center;
+  margin-top: 0.7rem;
+}
+
+.btn-gen-reporte{
+  background-color: #002f55 !important;
+  color: white !important;
+  outline: 1px solid #002f55 !important;
+}
+
+.btn-gen-reporte:hover{
+  background-color: #005fa300 !important;
+  color: #002f55 !important;
+  outline: 1px solid #002f55 !important;
 }
 
 .relacion-vacia,
